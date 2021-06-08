@@ -1,0 +1,52 @@
+.f-wrap {
+    height: auto;
+    background-color: #F8F8F8;
+}
+
+.f-logo {
+    padding: 1rem 0rem 1rem 0rem;
+    width: 1.250rem;
+}
+
+.f-textLogo{
+    padding: 1rem 1rem 1rem .5rem;
+    height: 3.5rem;
+}
+
+.f-p{
+    padding: 1rem 0rem 1rem 0rem;
+    font-size: 1.2vmax;
+    font-weight: 500;
+    font-family: 'Rubik', sans-serif;
+    color: #4F5665;
+}
+
+.f-bc-sm{
+    background-color: #FFBA33;
+}
+
+.f-c-sm{
+    color: #6A4029;
+}
+
+.f-text-cr{
+    padding: 1rem 0rem 1rem 0rem;
+    font-size: 1.2vmax;
+    font-weight: 100;
+    font-family: 'Rubik', sans-serif;
+    color: #4F5665;
+}
+
+.f-title-sf{
+    padding: 1rem 0rem 1rem 0rem;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 500;
+    color: #0B132A;
+}
+
+.f-content-sf{
+    padding: 0rem 0rem .5rem 0rem;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 400;
+    color: #4F5665;
+}

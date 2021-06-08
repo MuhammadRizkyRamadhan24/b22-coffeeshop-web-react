@@ -1,0 +1,51 @@
+.fp-wrap{
+    height: 45rem;
+    background-image: url(/src/assets/images/fp.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.fp-font{
+    font-family: 'Rubik', sans-serif;
+}
+
+.fp-font.width-3{
+    width: 28rem;
+}
+
+.fp-input{
+    width: 64rem;
+}
+
+.fp-resend-btn{
+    background-color: #6A4029;
+    border-radius: 1rem;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.2vmax;
+    font-weight: 700;
+    font-family: 'Rubik', sans-serif;
+    cursor: pointer;
+}
+
+.fp-email-btn{
+    background-color: #FFBA33;
+    border-radius: 1rem;
+    color: #6A4029;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.2vmax;
+    font-weight: 700;
+    font-family: 'Rubik', sans-serif;
+    cursor: pointer;
+}
+
+.fp-email-form{
+    font-size: 1.2vmax;
+    font-weight: 700;
+    font-family: 'Rubik', sans-serif;
+    width: 30rem;
+}

@@ -1,0 +1,30 @@
+.h-wrap{
+    height: 5rem;
+    border-bottom: .1rem solid #9F9F9F;
+}
+
+.h-logo {
+    padding: 1rem 0rem 1rem 0rem;
+    width: 1.250rem;
+}
+
+.h-textLogo{
+    padding: 1rem 0rem 1rem .5rem;
+    height: 3.5rem;
+}
+
+.h-sh{
+    padding: 1rem 2rem 1rem 0rem;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 400;
+    color: #4F5665;
+}
+
+.h-ci{
+    color: #4F5665;
+}
+
+.h-up-sm{
+    border-radius: inherit;
+    object-fit: cover;
+}

@@ -1,0 +1,115 @@
+.product-f-r{
+    font-family: 'Rubik', sans-serif;
+}
+
+.product-f-p{
+    font-family: 'Poppins', sans-serif;
+}
+
+.product-card{
+    border-bottom-right-radius: 200rem;
+    border-bottom-left-radius: 200rem;
+}
+
+.product-title{
+    color: #6A4029;
+    font-size: 1.75vmax;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 700;
+}
+
+.product-paragraph{
+    color: #4F5665;
+    font-size: 1vmax;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 500;
+}
+
+.product-card-1{
+    background-color: #FFCB65;
+    border: 1px solid #FFCB65
+}
+
+.product-card-2{
+    background-color: #000;
+    border: 1px solid #000;
+}
+
+.product-card-3{
+    background-color: #895537;
+    border: 1px solid #895537;
+}
+
+.product-card-p{
+    font-size: 1.5vmax;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+}
+
+.product-card-pd{
+    font-size: 0.75vmax;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+.product-card-c{
+    font-size: 1vmax;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+.product-card-cc{
+    font-size: 2vmax;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+}
+
+.product-card-cd{
+    font-size: 0.75vmax;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+.product-card-btn{
+    background-color: #6A4029;
+    border-radius: 1rem;
+    color: #fff;
+    padding: 1rem 3rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.2vmax;
+    font-weight: 700;
+    font-family: 'Rubik', sans-serif;
+    cursor: pointer;
+}
+
+.product-tc{
+    font-size: 1vmax;
+    font-family: 'Rubik', sans-serif;
+    color: #4F5665;
+}
+
+.product-nav{
+    background-color: #fff;
+    color: #9F9F9F;
+    padding: 1rem 0rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: 400;
+    font-family: 'Rubik', sans-serif;
+    cursor: pointer;
+}
+
+.product-nav:hover {
+    border-bottom: 3px solid rgba(106, 64, 41, 1);
+    color: #6A4029;
+    font-weight: 700;
+}
+
+.active{
+    border-bottom: 3px solid rgba(106, 64, 41, 1);
+    color: #6A4029;
+    font-weight: 700;
+}

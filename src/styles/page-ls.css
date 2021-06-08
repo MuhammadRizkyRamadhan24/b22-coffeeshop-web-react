@@ -1,0 +1,109 @@
+.ls-wrap{
+    min-height: auto;
+}
+
+.ls-hw{
+    height: 50rem;
+}
+
+.ls-backgroundLeft{
+    background-size: cover;
+}
+
+.ls-logo{
+    padding: 3rem 0rem 3rem 3rem;
+    width: 4.325rem;
+}
+
+.ls-textLogo{
+    padding: 3rem 3rem 3rem .5rem;
+    height: 7.5rem;
+}
+
+.ls-buttonTop{
+    background-color: #FFBA33;
+    color: #6A4029;
+    padding: .5rem 2rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 2vh;
+    font-weight: 500;
+    font-family: 'Rubik', sans-serif;
+    margin: 3rem;
+    cursor: pointer;
+}
+
+.ls-titleForm{
+    color: #6A4029;
+    font-size: 2.5vmax;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 700;
+}
+
+.ls-form{
+    font-family: 'Rubik', sans-serif;
+    color:#4F5665;
+    font-weight: 700;
+}
+
+.ls-inputForm{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: .125rem solid #4F5665;
+    border-radius: 1rem;
+    box-sizing: border-box;
+    font-family: 'Rubik', sans-serif;
+}
+
+.ls-button{
+    background-color: #FFBA33;
+    width: 100%;
+    border-radius: 1rem;
+    color: #6A4029;
+    padding: 1rem 3rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.2vmax;
+    font-weight: 700;
+    font-family: 'Rubik', sans-serif;
+    cursor: pointer;
+}
+
+.ls-button-g{
+    background-color: #f4f4f4;
+    width: 100%;
+    border-radius: 1rem;
+    color: black;
+    padding: 1rem 3rem;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.2vmax;
+    font-weight: 700;
+    font-family: 'Rubik', sans-serif;
+    cursor: pointer;
+}
+
+.ls-fp{
+    color:#6A4029;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.ls-font-r{
+    font-family: 'Rubik', sans-serif;
+}
+
+.ls-font-p{
+    font-family: 'Poppins', sans-serif ;
+}
+
+@media only screen and (max-width: 768px) {
+    .ls-hw{
+        height: auto;
+    }
+}
+  

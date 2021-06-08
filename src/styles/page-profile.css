@@ -1,0 +1,170 @@
+.profile-wrap{
+    background-image: url(/src/assets/images/profile.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.profile-title{
+    color: #FFFFFF;
+    font-size: 2.5vmax;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 500;
+}
+
+.profile-border{
+    border-bottom: .750rem solid #6A4029;
+}
+
+.profile-bi{
+    background-color: #6A4029;
+}
+
+.profile-bi-p{
+    position: relative;
+    top: -2rem;
+    left: 3rem;
+}
+
+.profile-i{
+    color: white;
+}
+
+.profile-name{
+    font-family: 'Rubik', sans-serif;
+    font-weight: 800;
+}
+
+.profile-email{
+    font-family: 'Rubik', sans-serif;
+    color: #4F5665;
+    font-weight: 400;
+}
+
+.profile-textContact{
+    font-family: 'Rubik', sans-serif;
+    color: #4F5665;
+    font-weight: 700;
+}
+
+.profile-label{
+    font-family: 'Rubik', sans-serif;
+    color: #585f6d;
+    font-weight: 500;
+}
+
+.profile-input{
+    width: 15rem;
+    padding: .2rem 0px;
+    margin: .75rem 0px;
+    display: inline-block;
+    font-family: 'Rubik', sans-serif;
+    border-bottom: .125rem solid #4F5665;
+    box-sizing: border-box;
+}
+
+.profile-rb {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  .profile-rb input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+  }
+  
+  .profile-rb:hover input ~ .checkmark {
+    background-color: #6A4029;
+  }
+  
+  .profile-rb input:checked ~ .checkmark {
+    background-color: #6A4029;
+  }
+  
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  .profile-rb input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  .profile-rb .checkmark:after {
+    top: 9px;
+      left: 9px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #FFBA33;
+  }
+
+  .profile-button-b{
+    background-color: #6A4029;
+    width: 100%;
+    border-radius: 1rem;
+    color: #fff;
+    padding: 1rem 3rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.2vmax;
+    font-weight: 700;
+    font-family: 'Rubik', sans-serif;
+    cursor: pointer;
+}
+
+.profile-button-y{
+    background-color: #FFBA33;
+    width: 100%;
+    border-radius: 1rem;
+    color: 6A4029;
+    padding: 1rem 3rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.2vmax;
+    font-weight: 700;
+    font-family: 'Rubik', sans-serif;
+    cursor: pointer;
+}
+
+.profile-button-w{
+    background-color: #fff;
+    width: 100%;
+    border-radius: 1rem;
+    color: 6A4029;
+    padding: 1rem 3rem;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.2vmax;
+    font-weight: 700;
+    font-family: 'Rubik', sans-serif;
+    cursor: pointer;
+}
+
+.profile-title-2{
+    color: #FFFFFF;
+    font-size: 1.75vmax;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 500;
+    text-align: center;
+}

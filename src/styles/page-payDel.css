@@ -1,0 +1,91 @@
+.pd-wrap{
+    height: 55rem;
+    background-image: url(/src/assets/images/pd.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.pd-title{
+    font-weight: 700;
+    font-family: 'Rubik', sans-serif;
+}
+
+.pd-title-detail{
+    font-weight: 700;
+    font-family: 'Rubik', sans-serif;
+    color: #362115;
+}
+
+.pd-text-iDetail{
+    font-family: 'Rubik', sans-serif;
+    color: #362115;
+}
+
+.pd-rb {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  .pd-rb input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    border: 1px solid rgb(136, 125, 125);
+    border-radius: 50%;
+  }
+  
+  .pd-rb:hover input ~ .checkmark {
+    background-color: #6A4029;
+  }
+  
+  .pd-rb input:checked ~ .checkmark {
+    background-color: #6A4029;
+  }
+  
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  .pd-rb input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  .pd-rb .checkmark:after {
+    top: 9px;
+      left: 9px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #FFBA33;
+  }
+
+  .pd-btn{
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    background-color: #6A4029;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: 700;
+    font-family: 'Rubik', sans-serif;
+    cursor: pointer;
+  }
