@@ -32,19 +32,19 @@ class Header extends Component{
     render(){
         return(
             <>
-                <div class="flex flex-row w-full h-wrap">
-                    <a href="/product" class="flex flex-row w-2/6 justify-center items-center">
-                        <img src={logo} alt="" class="h-logo"/>
-                        <img src={textLogo} alt="" class="h-textLogo"/>
+                <div className="flex flex-row w-full h-wrap">
+                    <a href="/product" className="flex flex-row w-2/6 justify-center items-center">
+                        <img src={logo} alt="" className="h-logo"/>
+                        <img src={textLogo} alt="" className="h-textLogo"/>
                     </a>
-                    <div class="flex flex-row w-2/6 justify-center items-center">
-                        <button onClick={this.goToHome} class="focus:outline-none h-sh text-sm">Home</button>
-                        <button onClick={this.goToProduct} class="focus:outline-none h-sh text-sm">Product</button>
-                        <button onClick={this.goToCart} class="focus:outline-none h-sh text-sm">Your Cart</button>
-                        <button onClick={this.goToHistory} class="focus:outline-none h-sh text-sm">History</button>
+                    <div className="flex flex-row w-2/6 justify-center items-center">
+                        <button onClick={this.goToHome} className="focus:outline-none h-sh text-sm">Home</button>
+                        <button onClick={this.goToProduct} className="focus:outline-none h-sh text-sm">Product</button>
+                        <button onClick={this.goToCart} className="focus:outline-none h-sh text-sm">Your Cart</button>
+                        <button onClick={this.goToHistory} className="focus:outline-none h-sh text-sm">History</button>
                     </div>
-                    <div class="flex flex-row w-2/6 justify-center items-center" >
-                        <div class="flex rounded-full h-8 w-32 px-2 mr-3 h-ci p-1 text-md border-2 justify-center items-center">
+                    <div className="flex flex-row w-2/6 justify-center items-center" >
+                        <div className="flex rounded-full h-8 w-32 px-2 mr-3 h-ci p-1 text-md border-2 justify-center items-center">
                             <input
                                 type='text'
                                 name='search'
@@ -53,11 +53,11 @@ class Header extends Component{
                             />
                             <FaSearch/>
                         </div>
-                        <a href="#Message" class="flex justify-center items-center rounded-full h-8 w-8 mr-3 h-ci p-2 text-md">
+                        <a href="#Message" className="flex justify-center items-center rounded-full h-8 w-8 mr-3 h-ci p-2 text-md">
                             <FaEnvelope />
                         </a>
-                        <button onClick={this.goToProfile} class="flex justify-center items-center focus:outline-none rounded-full h-8 w-8 mr-3 f-bc-sm">
-                            <img src={user} alt="" class="h-up-sm"/>
+                        <button onClick={this.goToProfile} className="flex justify-center items-center focus:outline-none rounded-full h-8 w-8 mr-3 f-bc-sm">
+                            <img src={user} alt="" className="h-up-sm"/>
                         </button>
                     </div>
                 </div>

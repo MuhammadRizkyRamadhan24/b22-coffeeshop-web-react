@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 
-import img from '../../assets/images/productdetail.png'
-
 import '../../styles/page-productDetail.css'
 
 class Img extends Component{
     render(){
         return(
             <>
-                <img src={img} alt="" class="rounded-full mt-5 mb-10 w-full"/>
+                <img src={this.props.image} alt="" className="rounded-full w-full h-full"/>
             </>
         )
     }
