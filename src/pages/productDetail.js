@@ -4,6 +4,8 @@ import Footer from '../components/footer'
 import ImageXL from '../components/productDetail/image-xl'
 import ImageSM from '../components/productDetail/image-sm'
 import ButtonVariant from '../components/productDetail/button-variant'
+import axios from 'axios';
+import {Link} from 'react-router-dom'
 
 import '../styles/page-productDetail.css';
 
@@ -11,75 +13,128 @@ class ProductDetail extends Component{
     constructor(props){
         super(props)
         this.state = {
+            data: [],
+            loading: true,
+            number: 0
         }
+    }
+
+    plusValue = () =>{
+        if(this.state.number === this.state.data.quantity ){
+          console.log('Value Dont > 10')
+        } else {
+          this.setState({
+            number: this.state.number + 1
+          })
+        }
+    }
+  
+    minusValue = () =>{
+        if(this.state.number === 0 ){
+            console.log('Value Dont < 0')
+        } else {
+          this.setState({
+            number: this.state.number - 1
+          })
+        }
+    }
+
+    getDetailData = async() => {
+        await axios({
+            method: 'GET',
+            url:`http://localhost:8880/items/${this.props.match.params.id}`,
+        })
+        .then((response)=>{
+            this.setState({
+                data: response.data.results,
+                loading: false
+            });
+        })
+        .catch((error)=>{
+            this.setState({
+              data: [{id:1, message: "Not Find Data!", status: "error"}],
+              loading: true
+            });
+        })
+    }
+
+    componentDidMount(){
+        this.getDetailData()
     }
     
     render(){
         return(
-            <div class="flex flex-col min-h-full">
+            <div className="flex flex-col min-h-full">
                 <Header/>
-                <div class="flex flex-row w-full productDetail-wrap py-12 px-36">
-                    <div class="flex flex-col w-2/6">
-                        <div class="text-md font-normal productDetail-font-r brown text-left w-full mb-10">Favorite & Promo<span class="font-bold"> Cold Brew</span></div>
-                        <ImageXL/>
-                        <p class="text-4xl productDetail-font-p font-bold text-center w-full">COLD BREW</p>
-                        <p class="text-2xl productDetail-font-p font-normal text-center w-full">IDR 30.000</p>
-                        <a href="payDel.html" class="flex items-center justify-center rounded-2xl w-full h-16 mt-5 mb-3 font-bold text-xl productDetail-btn focus:outline-none productDetail-bg-brown text-white">Add to Cart</a>
-                        <button class="rounded-2xl w-full h-16 mt-3 mb-5 font-bold text-xl productDetail-btn focus:outline-none productDetail-bg-yellow brown">Ask a Staff</button>
+                <div className="flex flex-row w-full productDetail-wrap py-12 px-36">
+                    <div className="flex flex-col w-2/6 items-center">
+                        <div className="text-md font-normal productDetail-font-r brown text-left w-full mb-10">Favorite & Promo<span className="font-bold"> {this.state.data.name}</span></div>
+                        <div className="rounded-full mt-5 mb-10 w-72 h-72">
+                            <ImageXL image={this.state.data.image}/>
+                        </div>
+                        
+                        <p className="text-4xl productDetail-font-p font-bold text-center w-full">{this.state.data.name}</p>
+                        <p className="text-2xl productDetail-font-p font-normal text-center w-full">IDR {this.state.data.base_price}</p>
+                        <button className="rounded-2xl w-full h-16 mt-3 mb-5 font-bold text-xl productDetail-btn focus:outline-none productDetail-bg-brown text-white">Add to Cart</button>
+                        <button className="rounded-2xl w-full h-16 mt-3 mb-5 font-bold text-xl productDetail-btn focus:outline-none productDetail-bg-yellow brown">Ask a Staff</button>
                     </div>
-                    <div class="flex flex-col w-4/6 ml-10 mt-5">
-                        <div class="flex flex-col w-full h-4/6 px-20 py-12 rounded-2xl bg-white">
-                            <div class="text-xl productDetail-font-p productDetail-textDel brown">
-                                Delivery only on <span class="font-bold">Monday to friday at  1 - 7 pm</span>
+                    <div className="flex flex-col w-4/6 ml-10 mt-5">
+                        <div className="flex flex-col w-full h-4/6 px-20 py-12 rounded-2xl bg-white">
+                            <div className="text-xl productDetail-font-p productDetail-textDel brown">
+                                {this.state.data.delivery}
                             </div>
-                            <p class="text-xl productDetail-font-p productDetail-detailDel brown my-4">
-                                Cold brewing is a method of brewing that combines ground coffee and cool water and uses time instead of heat to extract the flavor. It is brewed in small batches and steeped for as long as 48 hours.
+                            <p className="text-xl productDetail-font-p productDetail-detailDel brown my-4">
+                                {this.state.data.detail}
                             </p>
-                            <div class="w-full text-center text-2xl my-6 productDetail-font-p font-bold">
+                            <div className="w-full text-center text-2xl my-6 productDetail-font-p font-bold">
                                 Choose a size
                             </div>
-                            <div class="flex flex-row w-full justify-center items-center">
-                                <ButtonVariant variant="R"/>
-                                <ButtonVariant variant="L"/>
-                                <ButtonVariant variant="XL"/>
+                            <div className="flex flex-row w-full justify-center items-center">
+                            {this.state.data.variants
+                                ? this.state.data.variants.map((d, i) => (
+                                    <ButtonVariant key={d.id} variant={d.variant}/>
+                                ))
+                            : "loading"}
                             </div>
                         </div>
-                        <div class="flex flex-col w-full h-2/6">
-                            <div class="w-full text-center text-xl mt-6 productDetail-font-p font-bold">
+                        <div className="flex flex-col w-full h-2/6">
+                            <div className="w-full text-center text-xl mt-6 productDetail-font-p font-bold">
                                 Choose Delivery Methods
                             </div>
-                            <div class="flex flex-row w-full justify-center items-center">
-                            <button class="rounded-2xl w-40 h-16 mt-5 mb-3 mx-3 text-lg productDetail-btn focus:outline-none bg-white target">Dine In</button>
-                                <button class="rounded-2xl w-40 h-16 mt-5 mb-3 mx-3 text-lg productDetail-btn focus:outline-none bg-white target">Door Delivery</button>
-                                <button class="rounded-2xl w-40 h-16 mt-5 mb-3 mx-3 text-lg productDetail-btn focus:outline-none bg-white target">Pick up</button>
+                            <div className="flex flex-row w-full justify-center items-center">
+                            <button className="rounded-2xl w-40 h-16 mt-5 mb-3 mx-3 text-lg productDetail-btn focus:outline-none bg-white target">Dine In</button>
+                                <button className="rounded-2xl w-40 h-16 mt-5 mb-3 mx-3 text-lg productDetail-btn focus:outline-none bg-white target">Door Delivery</button>
+                                <button className="rounded-2xl w-40 h-16 mt-5 mb-3 mx-3 text-lg productDetail-btn focus:outline-none bg-white target">Pick up</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="absolute w-full h-40 flex flex-row px-24 justify-center items-center" style={{top: "60rem"}}>
-                    <div class="flex flex-row h-full w-3/6 bg-white rounded-2xl shadow-md mr-5 px-6 items-center">
-                        <ImageSM/>
-                        <div class="flex flex-col ml-5 w-72">
-                            <div class="text-xl productDetail-font-p font-extrabold">
-                                COLD BREW
+                <div className="absolute w-full h-40 flex flex-row px-24 justify-center items-center" style={{top: "60rem"}}>
+                    <div className="flex flex-row h-full w-3/6 bg-white rounded-2xl shadow-md mr-5 px-6 items-center">
+                        <ImageSM image={this.state.data.image}/>
+                        <div className="flex flex-col ml-5 w-72">
+                            <div className="text-xl productDetail-font-p font-extrabold">
+                                {this.state.data.name}
                             </div>
-                            <div class="text-xl productDetail-font-p font-normal">
+                            <div className="text-xl productDetail-font-p font-normal">
                                 x1 (Large)
                             </div>
-                            <div class="text-xl productDetail-font-p font-normal">
+                            <div className="text-xl productDetail-font-p font-normal">
                                 x1 (Regular)
                             </div>
                         </div>
-                        <div class="flex flex-row w-48">
-                            <button class="rounded-full h-8 w-8 font-bold text-xl productDetail-btn focus:outline-none productDetail-bg-yellow">-</button>
-                            <div class="text-xl productDetail-font-p font-extrabold px-8">
-                                1
+                        <div className="flex flex-row w-48">
+                            <button onClick={this.minusValue} className="rounded-full h-8 w-8 font-bold text-xl productDetail-btn focus:outline-none productDetail-bg-yellow">-</button>
+                            <div className="text-xl productDetail-font-p font-extrabold px-8">
+                                {this.state.number}
                             </div>
-                            <button class="rounded-full h-8 w-8 font-bold text-xl productDetail-btn focus:outline-none productDetail-bg-yellow">+</button>
+                            <button onClick={this.plusValue} className="rounded-full h-8 w-8 font-bold text-xl productDetail-btn focus:outline-none productDetail-bg-yellow">+</button>
                         </div>
                     </div>
-                    <button class="flex justify-center items-center h-full w-1/6 text-xl font-bold productDetail-btn productDetail-font-p focus:outline-none productDetail-bg-yellow rounded-2xl shadow-md ml-5">
+                    <button className="flex justify-center items-center h-full w-1/6 text-xl font-bold productDetail-btn productDetail-font-p focus:outline-none productDetail-bg-yellow rounded-2xl shadow-md ml-5">
+                        <Link to='/payment'>
                         CHECKOUT
+                        </Link>
                     </button>
                 </div>
                 <Footer/>

@@ -3,6 +3,7 @@ import Header from '../components/header'
 import Footer from '../components/footer'
 import Coupon from '../components/product/coupon'
 import Card from '../components/product/card'
+import axios from 'axios';
 
 import '../styles/page-ls.css';
 
@@ -11,63 +12,81 @@ class Product extends Component{
     constructor(props){
         super(props)
         this.state = {
+            data: [],
+            loading: true
         }
+    }
+
+    getDataByFavorite = async() => {
+        await axios({
+            method: 'GET',
+            url:'http://localhost:8880/category/4/items',
+        })
+        .then((response)=>{
+            this.setState({
+                data: response.data.results,
+                loading: false
+            });
+        })
+        .catch((error)=>{
+            this.setState({
+              data: [{id:1, message: "Not Find Data!", status: "error"}],
+              loading: true
+            });
+        })
+    }
+
+    componentDidMount(){
+        this.getDataByFavorite()
     }
 
     render(){
         return(
-        <div class="flex flex-col min-h-full">
+        <div className="flex flex-col min-h-full">
             <Header history={this.props.history}/>
             
-            <div class="flex flex-row w-full h-auto">
-                <div class="flex flex-col w-2/6 items-center py-10" style={{borderRight: '.1rem solid #9F9F9F'}}>
-                    <div class="text-center product-title">
+            <div className="flex flex-row w-full h-auto">
+                <div className="flex flex-col w-2/6 items-center py-10" style={{borderRight: '.1rem solid #9F9F9F'}}>
+                    <div className="text-center product-title">
                         Promo for you
                     </div>
-                    <div class="text-center product-paragraph w-64 pt-4 pb-4">
+                    <div className="text-center product-paragraph w-64 pt-4 pb-4">
                         Coupons will be updated every weeks. Check them out! 
                     </div>
                     <Coupon />
-                    <a class="product-card-btn w-60 pt-4 pb-4" href=" ">Apply coupon</a>
-                    <div class="flex flex-col pt-24">
-                        <div class="product-tc font-bold">
+                    <a className="product-card-btn w-60 pt-4 pb-4" href=" ">Apply coupon</a>
+                    <div className="flex flex-col pt-24">
+                        <div className="product-tc font-bold">
                             Terms and Condition
                         </div>
-                        <div class="product-tc font-normal">
+                        <div className="product-tc font-normal">
                             1. You can only apply 1 coupon per day
                         </div>
-                        <div class="product-tc font-normal">
+                        <div className="product-tc font-normal">
                             2. It only for dine in
                         </div> 
-                        <div class="product-tc font-normal">
+                        <div className="product-tc font-normal">
                             3. Buy 1 get 1 only for new user
                         </div>
-                        <div class="product-tc font-normal">
+                        <div className="product-tc font-normal">
                             4. Should make member card to apply coupon
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-col w-4/6">
-                    <div class="flex flex-row h-1/6 justify-center items-center mx-12">
-                        <a class="flex-1 text-md text-center product-nav active" href=" ">Favorite Product</a>
-                        <a class="flex-1 text-md text-center product-nav" href=" ">Coffee</a>
-                        <a class="flex-1 text-md text-center product-nav" href=" ">Non Coffee</a>
-                        <a class="flex-1 text-md text-center product-nav" href=" ">Foods</a>
-                        <a class="flex-1 text-md text-center product-nav" href=" ">Add-on</a>
+                <div className="flex flex-col w-4/6">
+                    <div className="flex flex-row h-1/6 justify-center items-center mx-12">
+                        <a className="flex-1 text-md text-center product-nav active" href=" ">Favorite Product</a>
+                        <a className="flex-1 text-md text-center product-nav" href=" ">Coffee</a>
+                        <a className="flex-1 text-md text-center product-nav" href=" ">Non Coffee</a>
+                        <a className="flex-1 text-md text-center product-nav" href=" ">Foods</a>
+                        <a className="flex-1 text-md text-center product-nav" href=" ">Add-on</a>
                     </div>
-                    <div class="grid grid-cols-4 gap-3 h-5/6 px-12 mb-20">
-                        <Card />
-                        <Card />
-                        <Card />
-                        <Card />
-                        <Card />
-                        <Card />
-                        <Card />
-                        <Card />
-                        <Card />
-                        <Card />
-                        <Card />
-                        <Card />  
+                    <div className="grid grid-cols-4 gap-3 h-5/6 px-12 mb-20">
+                    {this.state.data
+                        ? this.state.data.map((d, i) => (
+                            <Card key={d.id} data={d}/>
+                        ))
+                    : "loading"}
                     </div>
                 </div>
 

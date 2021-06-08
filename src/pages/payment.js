@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Header from '../components/header'
 import Footer from '../components/footer'
 import img from '../assets/images/pd-item.png'
+import {FaTruck, FaUniversity, FaCreditCard} from 'react-icons/fa'
 
 import '../styles/page-payDel.css';
 
@@ -82,15 +83,15 @@ class Payment extends Component{
                     </div>
                     <div className="flex items-center text-xl pd-title text-white w-full h-20 pt-10">Payment method</div>
                     <div className="flex flex-col bg-white rounded-3xl w-full h-52 pl-10 justify-center">
-                        <label className="pd-rb text-lg pd-text-iDetail pl-8 mb-4 mt-4 font-medium"><i className="fas fa-credit-card pr-2"></i>Card
+                        <label className="pd-rb text-lg pd-text-iDetail pl-8 mb-4 mt-4 font-medium"><FaCreditCard className='pr-1'/> Card
                             <input type="radio" id="card" name="payment" value="card"/>
                             <span className="checkmark"></span>
                         </label>
-                        <label className="pd-rb text-lg pd-text-iDetail pl-8 mb-4 mt-4 font-medium"><i className="fas fa-university pr-2"></i>Bank account
+                        <label className="pd-rb text-lg pd-text-iDetail pl-8 mb-4 mt-4 font-medium"><FaUniversity className='pr-1'/>Bank account
                             <input type="radio" id="bank-account" name="payment" value="bank-account"/>
                             <span className="checkmark"></span>
                         </label>
-                        <label className="pd-rb text-lg pd-text-iDetail pl-8 mb-4 mt-4 font-medium"><i className="fas fa-truck pr-2"></i>Cash on delivery
+                        <label className="pd-rb text-lg pd-text-iDetail pl-8 mb-4 mt-4 font-medium"><FaTruck className='pr-1'/>Cash on delivery
                             <input type="radio" id="cod" name="payment" value="cod"/>
                             <span className="checkmark"></span>
                         </label>

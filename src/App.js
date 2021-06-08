@@ -19,7 +19,7 @@ function App() {
         <Route path='/product' exact component={Product} />
         <Route path='/login' component={Login} />
         <Route path='/signup' component={Signup} />
-        <Route path='/productdetail' component={ProductDetail} />
+        <Route path='/product/:id' component={ProductDetail} />
         <Route path='/forgotpass' component={ForgotPass} />
         <Route path='/payment' component={Payment} />
         <Route path='/profile' component={Profile} />

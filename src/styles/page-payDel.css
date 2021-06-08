@@ -22,7 +22,8 @@
 }
 
 .pd-rb {
-    display: block;
+    display: flex;
+    align-items: center;
     position: relative;
     padding-left: 35px;
     margin-bottom: 12px;
