@@ -3,6 +3,7 @@ import Header from '../components/header'
 import Footer from '../components/footer'
 import Coupon from '../components/product/coupon'
 import Card from '../components/product/card'
+import Nav from '../components/product/nav'
 import axios from 'axios';
 
 import '../styles/page-ls.css';
@@ -13,21 +14,22 @@ class Product extends Component{
         super(props)
         this.state = {
             data: [],
+            category: [],
+            id:'',
             loading: true,
             status: ''
         }
     }
 
-    getDataByFavorite = async() => {
-        await axios({
+    getCategory = () => {
+        axios({
             method: 'GET',
-            url:'http://localhost:8880/category/4/items',
+            url:'http://localhost:8880/category',
         })
         .then((response)=>{
             this.setState({
-                data: response.data.results,
-                loading: false,
-                status: 'Favorite Product'
+                category: response.data.results,
+                loading: false
             });
         })
         .catch((error)=>{
@@ -38,36 +40,17 @@ class Product extends Component{
         })
     }
 
-    getDataByCoffee = async() => {
-        await axios({
+    getDataByCategories = (id, name) => {
+        const category = name
+        axios({
             method: 'GET',
-            url:'http://localhost:8880/category/1/items',
+            url:`http://localhost:8880/category/${id}/items`,
         })
         .then((response)=>{
             this.setState({
                 data: response.data.results,
                 loading: false,
-                status: 'Coffee'
-            });
-        })
-        .catch((error)=>{
-            this.setState({
-              data: [{id:1, message: "Not Find Data!", status: "error"}],
-              loading: true
-            });
-        })
-    }
-
-    getDataByNonCoffee = async() => {
-        await axios({
-            method: 'GET',
-            url:'http://localhost:8880/category/2/items',
-        })
-        .then((response)=>{
-            this.setState({
-                data: response.data.results,
-                loading: false,
-                status: 'Non Coffee'
+                status: category
             });
         })
         .catch((error)=>{
@@ -79,7 +62,8 @@ class Product extends Component{
     }
 
     componentDidMount(){
-        this.getDataByFavorite()
+        this.getCategory()
+        this.getDataByCategories(1, 'Favorite Product')
     }
 
     render(){
@@ -87,43 +71,43 @@ class Product extends Component{
         <div className="flex flex-col min-h-full">
             <Header history={this.props.history}/>
             
-            <div className="flex flex-row w-full h-auto">
-                <div className="flex flex-col w-2/6 items-center py-10" style={{borderRight: '.1rem solid #9F9F9F'}}>
-                    <div className="text-center product-title">
+            <div className="flex flex-col md:flex-row w-full h-auto">
+                <div className="flex flex-col h-2/6 md:w-2/6 items-center py-10" style={{borderRight: '.1rem solid #9F9F9F'}}>
+                    <div className="text-center product-title text-xl">
                         Promo for you
                     </div>
-                    <div className="text-center product-paragraph w-64 pt-4 pb-4">
+                    <div className="text-center product-paragraph text-base w-64 pt-4 pb-4">
                         Coupons will be updated every weeks. Check them out! 
                     </div>
                     <Coupon />
-                    <a className="product-card-btn w-60 pt-4 pb-4" href=" ">Apply coupon</a>
+                    <button className="focus:outline-none product-card-btn w-60 pt-4 pb-4 text-lg">Apply coupon</button>
                     <div className="flex flex-col pt-24">
-                        <div className="product-tc font-bold">
+                        <div className="product-tc text-sm font-bold">
                             Terms and Condition
                         </div>
-                        <div className="product-tc font-normal">
+                        <div className="product-tc text-sm font-normal">
                             1. You can only apply 1 coupon per day
                         </div>
-                        <div className="product-tc font-normal">
+                        <div className="product-tc text-sm font-normal">
                             2. It only for dine in
                         </div> 
-                        <div className="product-tc font-normal">
+                        <div className="product-tc text-sm font-normal">
                             3. Buy 1 get 1 only for new user
                         </div>
-                        <div className="product-tc font-normal">
+                        <div className="product-tc text-sm font-normal">
                             4. Should make member card to apply coupon
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col w-4/6">
-                    <div className="flex flex-row h-1/6 justify-center items-center mx-12">
-                        <button onClick={this.getDataByFavorite} className="focus:outline-none flex-1 text-md text-center product-nav">Favorite Product</button>
-                        <button onClick={this.getDataByCoffee} className="focus:outline-none flex-1 text-md text-center product-nav" >Coffee</button>
-                        <button onClick={this.getDataByNonCoffee} className="focus:outline-none flex-1 text-md text-center product-nav" >Non Coffee</button>
-                        <button className="focus:outline-none flex-1 text-md text-center product-nav" href=" ">Foods</button>
-                        <button className="focus:outline-none flex-1 text-md text-center product-nav" href=" ">Add-on</button>
+                <div className="flex flex-col h-4/6 md:w-4/6">
+                    <div className="flex flex-row h-1/6 justify-center items-center mx-12 my-6">
+                        {this.state.category
+                            ? this.state.category.map((d, i) => (
+                                <Nav key={d.id} func={() => this.getDataByCategories(d.id, d.name_category)} data={d} />
+                            ))
+                        : "loading"}
                     </div>
-                    <div className="grid grid-cols-4 gap-3 h-5/6 px-12 mb-20">
+                    <div className="grid grid-cols-3 md:grid-cols-4 gap-3 h-5/6 p-10 md:px-12 md:mb-20">
                     {this.state.data
                         ? this.state.data.map((d, i) => (
                             <Card key={d.id} status={this.state.status} data={d}/>

@@ -11,24 +11,24 @@ class Coupon extends Component{
                 <div className="flex flex-col h-96 w-56 rounded-2xl product-card-1 justify-center items-center">
                     <div className="flex flex-col justify-center items-center w-full h-4/6 p-6">
                         <img src={imgCoupon} alt="" className="rounded-full h-28 m-4"/>
-                        <div className="text-center product-card-p">
+                        <div className="text-center product-card-p text-lg">
                             Beff Spaghetti
                         </div>
-                        <div className="text-center product-card-p">
+                        <div className="text-center product-card-p text-lg">
                             20% OFF
                         </div>
-                        <div className="text-center product-card-pd m-1">
+                        <div className="text-center product-card-pd m-1 text-xs">
                             Buy 1 Choco Oreo and get 20% off for Beef Spaghetti
                         </div>
                     </div>
                     <div className="flex flex-col justify-center items-center w-full h-2/6 border-t-2 border-black border-dashed">
-                        <div className="text-center product-card-c">
+                        <div className="text-center product-card-c text-base">
                             COUPON CODE
                         </div>
-                        <div className="text-center product-card-cc">
+                        <div className="text-center product-card-cc text-2xl">
                             FNPR15RG
                         </div>
-                        <div className="text-center product-card-cd">
+                        <div className="text-center product-card-cd text-xs">
                             Valid untill October 10th 2020
                         </div>
                     </div>

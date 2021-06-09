@@ -13,14 +13,14 @@
 
 .product-title{
     color: #6A4029;
-    font-size: 1.75vmax;
+    /* font-size: 1.75vmax; */
     font-family: 'Rubik', sans-serif;
     font-weight: 700;
 }
 
 .product-paragraph{
     color: #4F5665;
-    font-size: 1vmax;
+    /* font-size: 1vmax; */
     font-family: 'Rubik', sans-serif;
     font-weight: 500;
 }
@@ -41,31 +41,31 @@
 }
 
 .product-card-p{
-    font-size: 1.5vmax;
+    /* font-size: 1.5vmax; */
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
 }
 
 .product-card-pd{
-    font-size: 0.75vmax;
+    /* font-size: 0.75vmax; */
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
 }
 
 .product-card-c{
-    font-size: 1vmax;
+    /* font-size: 1vmax; */
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
 }
 
 .product-card-cc{
-    font-size: 2vmax;
+    /* font-size: 2vmax; */
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
 }
 
 .product-card-cd{
-    font-size: 0.75vmax;
+    /* font-size: 0.75vmax; */
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
 }
@@ -78,14 +78,14 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 1.2vmax;
+    /* font-size: 1.2vmax; */
     font-weight: 700;
     font-family: 'Rubik', sans-serif;
     cursor: pointer;
 }
 
 .product-tc{
-    font-size: 1vmax;
+    /* font-size: 1vmax; */
     font-family: 'Rubik', sans-serif;
     color: #4F5665;
 }
