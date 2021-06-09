@@ -13,7 +13,8 @@ class Product extends Component{
         super(props)
         this.state = {
             data: [],
-            loading: true
+            loading: true,
+            status: ''
         }
     }
 
@@ -25,7 +26,48 @@ class Product extends Component{
         .then((response)=>{
             this.setState({
                 data: response.data.results,
-                loading: false
+                loading: false,
+                status: 'Favorite Product'
+            });
+        })
+        .catch((error)=>{
+            this.setState({
+              data: [{id:1, message: "Not Find Data!", status: "error"}],
+              loading: true
+            });
+        })
+    }
+
+    getDataByCoffee = async() => {
+        await axios({
+            method: 'GET',
+            url:'http://localhost:8880/category/1/items',
+        })
+        .then((response)=>{
+            this.setState({
+                data: response.data.results,
+                loading: false,
+                status: 'Coffee'
+            });
+        })
+        .catch((error)=>{
+            this.setState({
+              data: [{id:1, message: "Not Find Data!", status: "error"}],
+              loading: true
+            });
+        })
+    }
+
+    getDataByNonCoffee = async() => {
+        await axios({
+            method: 'GET',
+            url:'http://localhost:8880/category/2/items',
+        })
+        .then((response)=>{
+            this.setState({
+                data: response.data.results,
+                loading: false,
+                status: 'Non Coffee'
             });
         })
         .catch((error)=>{
@@ -75,16 +117,16 @@ class Product extends Component{
                 </div>
                 <div className="flex flex-col w-4/6">
                     <div className="flex flex-row h-1/6 justify-center items-center mx-12">
-                        <a className="flex-1 text-md text-center product-nav active" href=" ">Favorite Product</a>
-                        <a className="flex-1 text-md text-center product-nav" href=" ">Coffee</a>
-                        <a className="flex-1 text-md text-center product-nav" href=" ">Non Coffee</a>
-                        <a className="flex-1 text-md text-center product-nav" href=" ">Foods</a>
-                        <a className="flex-1 text-md text-center product-nav" href=" ">Add-on</a>
+                        <button onClick={this.getDataByFavorite} className="focus:outline-none flex-1 text-md text-center product-nav">Favorite Product</button>
+                        <button onClick={this.getDataByCoffee} className="focus:outline-none flex-1 text-md text-center product-nav" >Coffee</button>
+                        <button onClick={this.getDataByNonCoffee} className="focus:outline-none flex-1 text-md text-center product-nav" >Non Coffee</button>
+                        <button className="focus:outline-none flex-1 text-md text-center product-nav" href=" ">Foods</button>
+                        <button className="focus:outline-none flex-1 text-md text-center product-nav" href=" ">Add-on</button>
                     </div>
                     <div className="grid grid-cols-4 gap-3 h-5/6 px-12 mb-20">
                     {this.state.data
                         ? this.state.data.map((d, i) => (
-                            <Card key={d.id} data={d}/>
+                            <Card key={d.id} status={this.state.status} data={d}/>
                         ))
                     : "loading"}
                     </div>

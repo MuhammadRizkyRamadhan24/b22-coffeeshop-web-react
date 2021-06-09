@@ -7,7 +7,7 @@ class Card extends Component{
     render(){
         return(
             <>
-            <Link to={{pathname: `/product/${this.props.data.id}`}} className="flex flex-col shadow-xl h-60 w-40 text-center items-center justify-center m-2 rounded-t-full product-card p-2">
+            <Link to={{pathname: `/product/${this.props.data.id}`, state: { status: this.props.status }}} className="flex flex-col shadow-xl h-60 w-40 text-center items-center justify-center m-2 rounded-t-full product-card p-2">
                 <div className="flex justify-center">
                     <img className="h-24 w-24 rounded-full" src={this.props.data.image} alt=""/>
                 </div>
