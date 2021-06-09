@@ -24,7 +24,7 @@ class Product extends Component{
     getCategory = () => {
         axios({
             method: 'GET',
-            url:'http://localhost:8880/category',
+            url:`${process.env.REACT_APP_BASE_URL}/category`,
         })
         .then((response)=>{
             this.setState({
@@ -44,7 +44,7 @@ class Product extends Component{
         const category = name
         axios({
             method: 'GET',
-            url:`http://localhost:8880/category/${id}/items`,
+            url:`${process.env.REACT_APP_BASE_URL}/category/${id}/items`,
         })
         .then((response)=>{
             this.setState({

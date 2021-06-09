@@ -42,7 +42,7 @@ class ProductDetail extends Component{
     getDetailData = async() => {
         await axios({
             method: 'GET',
-            url:`http://localhost:8880/items/${this.props.match.params.id}`,
+            url:`${process.env.REACT_APP_BASE_URL}/items/${this.props.match.params.id}`,
         })
         .then((response)=>{
             this.setState({
