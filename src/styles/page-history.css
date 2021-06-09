@@ -1,0 +1,39 @@
+.history-wrap{
+    height: auto;
+    background-image: url(/src/assets/images/history.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.history-font{
+    font-family: 'Rubik', sans-serif;
+}
+
+.history-button-b{
+    background-color: #6A4029;
+    border-radius: 1rem;
+    color: #fff;
+    padding: 1rem 3rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.2vmax;
+    font-weight: 700;
+    font-family: 'Rubik', sans-serif;
+    cursor: pointer;
+}
+
+.profile-button-w{
+    background-color: #fff;
+    border: 2px solid #6A4029;
+    border-radius: 1rem;
+    color: #6A4029;
+    padding: 1rem 3rem;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.2vmax;
+    font-weight: 700;
+    font-family: 'Rubik', sans-serif;
+    cursor: pointer;
+}

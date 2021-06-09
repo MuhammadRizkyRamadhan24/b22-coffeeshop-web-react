@@ -9,7 +9,7 @@ import ForgotPass from './pages/forgotpass';
 import Payment from './pages/payment';
 import Profile from './pages/profile';
 // import Search from './pages/Search';
-// import History from './pages/History'
+import History from './pages/history'
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
         <Route path='/forgotpass' component={ForgotPass} />
         <Route path='/payment' component={Payment} />
         <Route path='/profile' component={Profile} />
-        {/* <Route path='/history' component={History} /> */}
+        <Route path='/history' component={History} />
       </Switch>
     </Router>
   );
