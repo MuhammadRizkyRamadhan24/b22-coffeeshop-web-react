@@ -63,12 +63,13 @@ class ProductDetail extends Component{
     }
     
     render(){
+        const bread = '>'
         return(
             <div className="flex flex-col min-h-full">
                 <Header/>
                 <div className="flex flex-row w-full productDetail-wrap py-12 px-36">
                     <div className="flex flex-col w-2/6 items-center">
-                        <div className="text-md font-normal productDetail-font-r brown text-left w-full mb-10">{this.props.location.state.status} ><span className="font-bold"> {this.state.data.name}</span></div>
+                        <div className="text-md font-normal productDetail-font-r brown text-left w-full mb-10">{this.props.location.state.status} {bread}<span className="font-bold"> {this.state.data.name}</span></div>
                         <div className="rounded-full mt-5 mb-10 w-72 h-72">
                             <ImageXL image={this.state.data.image}/>
                         </div>
