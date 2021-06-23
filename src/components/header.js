@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import logo from '../assets/images/logo.png'
 import textLogo from '../assets/images/textLogo.png'
-import user from '../assets/images/user.png'
 import ButtonMini from '../components/ls/button-mini-ls'
 
 import { FaSearch, FaEnvelope } from 'react-icons/fa'
@@ -34,7 +33,6 @@ class Header extends Component{
 
     render(){
         const {token} = this.props.auth
-        // console.log(this.props);
         return(
             <>
                 <div className="flex flex-row w-full h-wrap">
@@ -64,7 +62,11 @@ class Header extends Component{
                                 <FaEnvelope />
                             </a>
                             <button onClick={this.goToProfile} className="flex justify-center items-center focus:outline-none rounded-full h-6 w-6 md:h-8 md:w-8 mr-3 f-bc-sm">
-                                <img src={user} alt="" className="h-up-sm"/>
+                                {this.props.user.data.length === 0 ?
+                                    <></>
+                                :
+                                    <img src={`http://localhost:8880/static/images/${this.props.user.data[0].image}`} alt="" className="h-up-sm"/>
+                                }
                             </button>
                         </>
                         
@@ -85,7 +87,8 @@ class Header extends Component{
 // export default Header
 
 const mapStateToProps = state => ({
-    auth: state.auth
+    auth: state.auth,
+    user: state.user
 })
 
 export default connect(mapStateToProps)(Header)
