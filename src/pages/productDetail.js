@@ -25,6 +25,26 @@ class ProductDetail extends Component{
         }
     }
 
+    // getDetailData = async() => {
+    //     await axios({
+    //         method: 'GET',
+    //         url:`${process.env.REACT_APP_BASE_URL}/items/${this.props.match.params.id}`,
+    //     })
+    //     .then((response)=>{
+    //         this.setState({
+    //             data: response.data.results,
+    //             loading: false
+    //         });
+    //     })
+    //     .catch((error)=>{
+    //         this.setState({
+    //           data: [{id:1, message: "Not Find Data!", status: "error"}],
+    //           loading: true
+    //         });
+    //     })
+    // }
+
+
     plusValue = () =>{
         if(this.state.number === this.props.product.detailData.quantity ){
           console.log(`Value Dont > ${this.props.product.detailData.quantity}`)
@@ -57,35 +77,6 @@ class ProductDetail extends Component{
                 item: [item]
             })
         }
-    }
-
-    // getDetailData = async() => {
-    //     await axios({
-    //         method: 'GET',
-    //         url:`${process.env.REACT_APP_BASE_URL}/items/${this.props.match.params.id}`,
-    //     })
-    //     .then((response)=>{
-    //         this.setState({
-    //             data: response.data.results,
-    //             loading: false
-    //         });
-    //     })
-    //     .catch((error)=>{
-    //         this.setState({
-    //           data: [{id:1, message: "Not Find Data!", status: "error"}],
-    //           loading: true
-    //         });
-    //     })
-    // }
-
-    getDetailData = () => {
-        const {token} = this.props.auth
-        const id = this.props.match.params.id
-        this.props.getDataById(id, token)
-        this.setState({
-            loading: false
-        })
-
     }
 
     setItem = (variant, price) => {
@@ -125,6 +116,16 @@ class ProductDetail extends Component{
             showConfirmButton: false,
             timer: 1500
         })
+    }
+
+    getDetailData = () => {
+        const {token} = this.props.auth
+        const id = this.props.match.params.id
+        this.props.getDataById(id, token)
+        this.setState({
+            loading: false
+        })
+
     }
 
     componentDidMount(){
