@@ -10,20 +10,28 @@ import Payment from './pages/payment';
 import Profile from './pages/profile';
 // import Search from './pages/Search';
 import History from './pages/history'
+import PrivateRoute from './components/privateRoute'
 
 function App() {
   return (
     <Router>
       <Switch>
         <Route path='/' exact component={Home} />
-        <Route path='/product' exact component={Product} />
         <Route path='/login' component={Login} />
         <Route path='/signup' component={Signup} />
-        <Route path='/product/:id' component={ProductDetail} />
         <Route path='/forgotpass' component={ForgotPass} />
-        <Route path='/payment' component={Payment} />
-        <Route path='/profile' component={Profile} />
-        <Route path='/history' component={History} />
+        <PrivateRoute>
+          <Route path='/product' exact component={Product} />
+          <Route path='/product/:id' component={ProductDetail} />
+          <Route path='/profile' component={Profile} />
+          <Route path='/payment' component={Payment} />
+          <Route path='/history' component={History} />
+        </PrivateRoute>
+        {/* <Route path='/product' exact component={Product} /> */}
+        {/* <Route path='/product/:id' component={ProductDetail} /> */}
+        {/* <Route path='/history' component={History} /> */}
+        {/* <Route path='/payment' component={Payment} /> */}
+        {/* <Route path='/profile' component={Profile} /> */}
       </Switch>
     </Router>
   );

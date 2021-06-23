@@ -34,6 +34,7 @@ class Header extends Component{
 
     render(){
         const {token} = this.props.auth
+        // console.log(this.props);
         return(
             <>
                 <div className="flex flex-row w-full h-wrap">
