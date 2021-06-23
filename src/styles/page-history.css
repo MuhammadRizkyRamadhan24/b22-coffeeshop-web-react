@@ -37,3 +37,10 @@
     font-family: 'Rubik', sans-serif;
     cursor: pointer;
 }
+
+.profile-button-white{
+    background-color: #fff;
+    border: 2px solid #6A4029;
+    border-radius: 1rem;
+    color: #6A4029;
+}

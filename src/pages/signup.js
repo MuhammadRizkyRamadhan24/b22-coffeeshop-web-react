@@ -7,12 +7,18 @@ import ButtonForm from '../components/ls/button-form-ls'
 import Footer from '../components/footer'
 import {FaGoogle} from 'react-icons/fa'
 
-import '../styles/page-ls.css';
+import '../styles/page-ls.css'
+
+import { connect } from 'react-redux'
+import { authRegister } from '../redux/actions/auth'
 
 class Signup extends Component{
     constructor(props){
         super(props)
         this.state = {
+            email: '',
+            phone_number: '',
+            password: ''
         }
     }
 
@@ -37,7 +43,39 @@ class Signup extends Component{
     //     document.location.href='/';
     // }
 
+    onRegister = (e) => {
+        e.preventDefault()
+        const {email, phone_number, password} = this.state
+        this.props.authRegister(email, phone_number, password)
+    }
+
+    changeEmail = (e) => {
+        this.setState({
+            email: e.target.value
+        })
+    }
+
+    changePassword = (e) => {
+        this.setState({
+            password: e.target.value
+        })
+    }
+
+    changePhoneNumber = (e) => {
+        this.setState({
+            phone_number: e.target.value
+        })
+    }
+
+    componentDidUpdate(){
+        const {msg} = this.props.auth
+        if(msg !== ''){
+            this.props.history.push('/login')
+        }
+    }
+
     render(){
+        const {errMsg} = this.props.auth
         return(
             <div className="flex flex-col ls-wrap">
                 <div className="flex flex-col md:flex-row w-full ls-hw">
@@ -56,12 +94,17 @@ class Signup extends Component{
                         </div>
                         <div className="flex flex-col h-auto w-full items-center justify-center px-10 md:px-32">
                             <div className="ls-titleForm">Sign Up</div>
-                            <form className="w-full text-lg md:text-2xl ls-form">
-                                <Form for="email" type="email" id="email" name="email" placeholder="Enter your email adress" label="Email Adress:"/>
-                                <Form for="password" type="password" id="password" name="password" placeholder="Enter your password" label="Password:"/>
-                                <Form for="text" type="text" id="phonenumber" name="phonenumber" placeholder="Enter your number" label="Phone Number:"/>
+                            {errMsg !== '' && 
+                            <div className='bg-red-300 text-red-600 font-bold w-full px-5 py-5 m-2 rounded-full'>
+                            {errMsg}
+                            </div>
+                            }
+                            <form onSubmit={this.onRegister} className="w-full text-lg md:text-2xl ls-form">
+                                <Form type="email" id="email" name="email" placeholder="Enter your email adress" value={this.state.email} func={this.changeEmail} label="Email Adress:"/>
+                                <Form type="password" id="password" name="password" placeholder="Enter your password" value={this.state.password} func={this.changePassword}  label="Password:"/>
+                                <Form type="text" id="phonenumber" name="phonenumber" placeholder="Enter your number" value={this.state.phone_number} func={this.changePhoneNumber} label="Phone Number:"/>
 
-                                <ButtonForm page="Sign Up" definition="login" history={this.props.history}/>
+                                <ButtonForm page="Sign Up"/>
                             </form>
                             <a className="flex justify-center items-center shadow-md ls-button-g" href="http://google.com"><FaGoogle className="pr-1"/>Sign Up with Google</a>
                         </div>
@@ -87,4 +130,14 @@ class Signup extends Component{
     }
 }
 
-export default Signup
+const mapStateToProps = state => ({
+    auth: state.auth
+})
+
+const mapDispatchToProps = {
+    authRegister
+}
+
+// export default Signup
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup)

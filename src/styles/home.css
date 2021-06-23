@@ -1,0 +1,22 @@
+.home-wrap-1{
+    height: 45rem;
+    background-image: url(/src/assets/images/home.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.home-font{
+    font-family: 'Rubik', sans-serif;
+}
+
+.home-button-y{
+    background-color: #FFBA33;
+    border-radius: 1rem;
+    color: #6A4029;
+    padding: 1rem 3rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family: 'Rubik', sans-serif;
+    cursor: pointer;
+}

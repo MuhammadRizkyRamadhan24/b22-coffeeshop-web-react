@@ -7,13 +7,19 @@ import Form from '../components/ls/form-ls'
 import ButtonForm from '../components/ls/button-form-ls'
 import Footer from '../components/footer'
 import {FaGoogle} from 'react-icons/fa'
+import '../styles/page-ls.css'
 
-import '../styles/page-ls.css';
+import { connect } from 'react-redux'
+import { authLogin } from '../redux/actions/auth'
+
+
 
 class Login extends Component{
     constructor(props){
         super(props)
         this.state = {
+            email: '',
+            password: ''
         }
     }
 
@@ -38,7 +44,35 @@ class Login extends Component{
     //     document.location.href='/';
     // }
 
+
+    onLogin = (e) => {
+        e.preventDefault()
+        const {email, password} = this.state
+        this.props.authLogin(email,password)
+    }
+
+    changeEmail = (e) => {
+        this.setState({
+            email: e.target.value
+        })
+    }
+
+    changePassword = (e) => {
+        this.setState({
+            password: e.target.value
+        })
+    }
+
+    componentDidUpdate(){
+        const {token} = this.props.auth
+        if(token !== null){
+            this.props.history.push('/product')
+        }
+    }
+
+
     render(){
+        const {errMsg} = this.props.auth
         return(
             <div className="flex flex-col ls-wrap">
                 <div className="flex flex-col md:flex-row w-full ls-hw">
@@ -56,12 +90,15 @@ class Login extends Component{
 
                         </div>
                         <div className="flex flex-col h-auto w-full items-center justify-center px-10 md:px-32">
-                            <div className="ls-titleForm">Sign Up</div>
-                            <form className="w-full text-lg md:text-2xl ls-form">
-                                <Form for="email" type="email" id="email" name="email" placeholder="Enter your email adress" label="Email Adress:"/>
-                                <Form for="password" type="password" id="password" name="password" placeholder="Enter your password" label="Password:"/>
+                            <div className="ls-titleForm">Login</div>
+                            {errMsg !== '' && <div className='bg-red-300 text-red-600 font-bold w-full px-5 py-5 m-2 rounded-full'>
+                            {errMsg}
+                            </div>}
+                            <form onSubmit={this.onLogin} className="w-full text-lg md:text-2xl ls-form">
+                                <Form type="email" id="email" name="email" placeholder="Enter your email adress" value={this.state.email} func={this.changeEmail} label="Email Adress:"/>
+                                <Form type="password" id="password" name="password" placeholder="Enter your password" value={this.state.password} func={this.changePassword}  label="Password:"/>
 
-                                <ButtonForm page="Login" definition="product" history={this.props.history}/>
+                                <ButtonForm page="Login"/>
                             </form>
                             <a className="flex justify-center items-center shadow-md ls-button-g my-4" href="http://google.com"><FaGoogle className="pr-1"/>Sign Up with Google</a>
                             <Link to="/forgotpass" className="flex justify-center items-center shadow-md ls-button-g my-4">Forgot Password?</Link>
@@ -88,4 +125,14 @@ class Login extends Component{
     }
 }
 
-export default Login
+const mapStateToProps = state => ({
+    auth: state.auth
+})
+
+const mapDispatchToProps = {
+    authLogin
+}
+
+// export default Login
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

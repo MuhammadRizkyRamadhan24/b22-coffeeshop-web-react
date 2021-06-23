@@ -30,7 +30,7 @@ class Footer extends Component{
                         </div>
                         <div className="f-text-cr w-24 md:w-96">©2020CoffeeStore</div>
                     </div>
-                    <div className="flex flex-row flex-col w-full md:w-2/4 h-2/4 md:h-full px-32 pt-1 md:pt-48 pb-10">
+                    <div className="flex flex-col w-full md:w-2/4 h-2/4 md:h-full px-32 pt-1 md:pt-48 pb-10">
                         <div className="flex flex-col w-2/4">
                             <div className="f-title-sf text-sm md:text-base">Product</div>
                             <a href=" " className="f-content-sf text-xs md:text-sm">Download</a>
