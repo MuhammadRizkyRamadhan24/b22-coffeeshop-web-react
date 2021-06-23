@@ -25,6 +25,26 @@ class ProductDetail extends Component{
         }
     }
 
+    // getDetailData = async() => {
+    //     await axios({
+    //         method: 'GET',
+    //         url:`${process.env.REACT_APP_BASE_URL}/items/${this.props.match.params.id}`,
+    //     })
+    //     .then((response)=>{
+    //         this.setState({
+    //             data: response.data.results,
+    //             loading: false
+    //         });
+    //     })
+    //     .catch((error)=>{
+    //         this.setState({
+    //           data: [{id:1, message: "Not Find Data!", status: "error"}],
+    //           loading: true
+    //         });
+    //     })
+    // }
+
+
     plusValue = () =>{
         if(this.state.number === this.props.product.detailData.quantity ){
           console.log(`Value Dont > ${this.props.product.detailData.quantity}`)
@@ -114,7 +134,6 @@ class ProductDetail extends Component{
     
     render(){
         const bread = '>'
-        // console.log(this.state.item.length);
         return(
             <div className="flex flex-col min-h-full">
                 <Header history={this.props.history}/>
