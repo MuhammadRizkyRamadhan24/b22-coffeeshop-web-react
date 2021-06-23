@@ -18,6 +18,18 @@ const user = (state=initialState, action) => {
                 errMsg: action.payload
             }
         }
+        case 'CHANGE_PASSWORD' : {
+            return {
+                ...state,
+                msg: action.payload
+            }
+        }
+        case 'CHANGE_PASSWORD_FAILED': {
+            return {
+                ...state,
+                msg: action.payload
+            }
+        }
         default: {
             return {
                 ...state
