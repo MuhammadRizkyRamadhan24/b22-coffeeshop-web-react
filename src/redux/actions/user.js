@@ -14,6 +14,7 @@ export const changeUser = (token, data) => {
         form.append('display_name', data.display_name)
         form.append('first_name', data.first_name)
         form.append('last_name', data.last_name)
+        console.log(form.get('image'))
         try{
             const {data} = await http(token).put(`${URL}/private/profile`, form )
             dispatch({

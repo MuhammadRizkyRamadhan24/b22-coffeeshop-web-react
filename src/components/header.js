@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import logo from '../assets/images/logo.png'
 import textLogo from '../assets/images/textLogo.png'
 import ButtonMini from '../components/ls/button-mini-ls'
+import img from '../assets/images/profile.jpg'
 
 import { FaSearch, FaEnvelope } from 'react-icons/fa'
 
@@ -35,6 +36,7 @@ class Header extends Component{
     getDataUser = () => {
         const {token} = this.props.auth
         this.props.getUserById(token)
+        // console.log(this.props.user.data[0].image)
     }
 
     componentDidMount(){
@@ -43,6 +45,7 @@ class Header extends Component{
 
     render(){
         const {token} = this.props.auth
+        
         return(
             <>
                 <div className="flex flex-row w-full h-wrap">
@@ -75,7 +78,7 @@ class Header extends Component{
                                 {this.props.user.data.length === 0 ?
                                     <></>
                                 :
-                                    <img src={`http://localhost:8880/static/images/${this.props.user.data[0].image}`} alt="" className="h-up-sm w-full h-full"/>
+                                    <img src={this.props.user.data[0].image === null ? img : `http://localhost:8880/static/images/${this.props.user.data[0].image}`} alt="" className="h-up-sm w-full h-full"/>
                                 }
                             </button>
                         </>
