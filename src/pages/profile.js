@@ -204,7 +204,6 @@ class Profile extends Component{
               backgroundColor: 'rgba(52, 52, 52, 0.8)'
             }
           }
-          console.log(this.state.showImage);
         return(
         <div className="flex flex-col min-h-full">
             <Header history={this.props.history}/>

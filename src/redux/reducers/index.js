@@ -20,7 +20,7 @@ const reducer = combineReducers({
     product,
     category,
     transaction,
-    user
+    user: persistReducer(persistAuth, user)
 })
 
 export default reducer

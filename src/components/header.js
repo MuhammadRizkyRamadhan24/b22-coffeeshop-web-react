@@ -33,16 +33,6 @@ class Header extends Component{
         this.props.history.push('/profile')
     }
 
-    getDataUser = () => {
-        const {token} = this.props.auth
-        this.props.getUserById(token)
-        // console.log(this.props.user.data[0].image)
-    }
-
-    componentDidMount(){
-        this.getDataUser()
-    }
-
     render(){
         const {token} = this.props.auth
         

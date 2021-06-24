@@ -4,7 +4,6 @@ import Card from '../components/history/card'
 import Header from '../components/header'
 import Footer from '../components/footer'
 import Modal from 'react-modal'
-// import Loader from 'react-loader-spinner'
 
 import { withRouter } from 'react-router-dom'
 
@@ -12,7 +11,6 @@ import { connect } from 'react-redux'
 import { getHistory, getDetailHistory } from '../redux/actions/transaction'
 
 import '../styles/page-ls.css'
-import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
 const customStyles = {
   content : {
@@ -75,12 +73,6 @@ function History(props){
     await getHistoryDetail(id)
     openDetailModal()
   }
-
-  
-
-  // useEffect (()=>{
-  //   getHistory()
-  // },  [])
 
   useEffect (()=>{
     const getHistory = () => {
