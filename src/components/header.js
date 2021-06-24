@@ -8,6 +8,7 @@ import { FaSearch, FaEnvelope } from 'react-icons/fa'
 import '../styles/header.css';
 
 import { connect }  from 'react-redux'
+import { getUserById } from '../redux/actions/user'
 
 class Header extends Component{
 
@@ -29,6 +30,15 @@ class Header extends Component{
 
     goToProfile = () =>{
         this.props.history.push('/profile')
+    }
+
+    getDataUser = () => {
+        const {token} = this.props.auth
+        this.props.getUserById(token)
+    }
+
+    componentDidMount(){
+        this.getDataUser()
     }
 
     render(){
@@ -65,7 +75,7 @@ class Header extends Component{
                                 {this.props.user.data.length === 0 ?
                                     <></>
                                 :
-                                    <img src={`http://localhost:8880/static/images/${this.props.user.data[0].image}`} alt="" className="h-up-sm"/>
+                                    <img src={`http://localhost:8880/static/images/${this.props.user.data[0].image}`} alt="" className="h-up-sm w-full h-full"/>
                                 }
                             </button>
                         </>
@@ -91,4 +101,8 @@ const mapStateToProps = state => ({
     user: state.user
 })
 
-export default connect(mapStateToProps)(Header)
+const mapDispatchToProps = {
+    getUserById
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
