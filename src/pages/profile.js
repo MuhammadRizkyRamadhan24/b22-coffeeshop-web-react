@@ -8,7 +8,7 @@ import Swal from 'sweetalert2'
 import '../styles/page-profile.css';
 
 import { connect } from 'react-redux'
-import { changePassword, getUserById, userLogout } from '../redux/actions/user'
+import { changePassword, getUserById, userLogout, changeUser } from '../redux/actions/user'
 import { authLogout } from '../redux/actions/auth'
 
 class Profile extends Component{
@@ -17,6 +17,7 @@ class Profile extends Component{
         this.state = {
             email: '',
             image: '',
+            showImage: '',
             phone_number: '',
             address: '',
             display_name: '',
@@ -24,7 +25,9 @@ class Profile extends Component{
             last_name: '',
             oldPassword: '',
             newPassword: '',
-            modalIsOpen: false
+            modalIsOpen: false,
+            buttonIsOpen: false,
+            forUpdate: false
         }
     }
 
@@ -37,6 +40,12 @@ class Profile extends Component{
     closeModal = () => {
         this.setState({
             modalIsOpen: false
+        })
+    }
+
+    openCloseButton = () => {
+        this.setState({
+            buttonIsOpen: !this.state.buttonIsOpen
         })
     }
 
@@ -64,18 +73,13 @@ class Profile extends Component{
         
     }
 
-    logout = () => {
-        this.props.authLogout()
-        this.props.userLogout()
-    }
-
     getDataUser = () => {
         const {token} = this.props.auth
         this.props.getUserById(token)
         .then((res) =>{
             this.setState({
                 email: this.props.user.data[0].email,
-                image: this.props.user.data[0].image,
+                showImage: this.props.user.data[0].image,
                 phone_number: this.props.user.data[0].phone_number,
                 address: this.props.user.data[0].address,
                 display_name: this.props.user.data[0].display_name,
@@ -85,8 +89,100 @@ class Profile extends Component{
         })
     }
 
+    changeUser = () => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Update data user?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#6A4029',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+            if(result.value) {
+                if (this.state.image === ''){
+                    const data = {
+                        email: this.state.email,
+                        phone_number: this.state.phone_number,
+                        address: this.state.address,
+                        display_name: this.state.display_name,
+                        first_name: this.state.first_name,
+                        last_name: this.state.last_name,
+                    }
+                    const { token } = this.props.auth
+                    this.props.changeUser(token, data)
+                    .then(async ()=>{
+                        await Swal.fire({
+                            position: 'center',
+                            icon: 'info',
+                            title: 'Data User Updated!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        .then(()=>{
+                            this.setState({
+                                forUpdate: !this.state.forUpdate
+                            })
+                        })
+                    }).catch((err)=> {
+                        console.log(err);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong'
+                        })
+                    })
+                } else {
+                    const data = {
+                        email: this.state.email,
+                        image: this.state.image,
+                        phone_number: this.state.phone_number,
+                        address: this.state.address,
+                        display_name: this.state.display_name,
+                        first_name: this.state.first_name,
+                        last_name: this.state.last_name,
+                    }
+                    const { token } = this.props.auth
+                    this.props.changeUser(token, data)
+                    .then(async()=>{
+                        await Swal.fire({
+                            position: 'center',
+                            icon: 'info',
+                            title: 'Data User Updated!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        .then(()=>{
+                            this.setState({
+                                forUpdate: !this.state.forUpdate
+                            })
+                        })
+                    }).catch((err)=> {
+                        console.log(err);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong'
+                        })
+                    })
+                }
+            }
+        })
+    }
+
+    logout = () => {
+        this.props.authLogout()
+        this.props.userLogout()
+    }
+
     componentDidMount(){
         this.getDataUser()
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        if (prevState.forUpdate !== this.state.forUpdate){
+            this.getDataUser()
+        }
     }
 
     render(){
@@ -104,7 +200,6 @@ class Profile extends Component{
               backgroundColor: 'rgba(52, 52, 52, 0.8)'
             }
           }
-          console.log(this.state.image);
         return(
         <div className="flex flex-col min-h-full">
 
@@ -114,10 +209,15 @@ class Profile extends Component{
                 <div className="profile-title py-4 h-1/6">User Profile</div>
                 <div className="flex flex-row w-full h-2/6 mb-16">
                     <div className="flex flex-col w-4/12 bg-white py-4 mr-8 rounded-md profile-border justify-center items-center">
-                        <img className="rounded-full w-36 h-36" src={`http://localhost:8880/static/images/${this.state.image}`} alt=" "/>
-                        {/* <button href="#ChangePhoto" className="focus:outline-none flex justify-center items-center rounded-full h-8 w-8 mr-3 profile-bi profile-bi-p">
+                        <img className="rounded-full w-36 h-36 object-cover object-center" src={`http://localhost:8880/static/images/${this.state.showImage}`} alt=" "/>
+                        <button onClick={this.openCloseButton} className="focus:outline-none flex justify-center items-center rounded-full h-8 w-8 mr-3 profile-bi profile-bi-p">
                             <FaPencilAlt className="text-white" />
-                        </button> */}<input className='flex justify-center items-center rounded-full h-8 w-8 mr-3 profile-bi profile-bi-p' name='image' onChange={(e) => this.setState({image :e.target.files})} type="file"/>
+                        </button>
+                        {this.state.buttonIsOpen === true ?
+                        <input className='w-48 mb-2' name='image' onChange={(e) => this.setState({image :e.target.files})} type="file" accept="image/x-png,image/gif,image/jpeg"/>
+                        :
+                        <></>
+                        }
                         <div className="text-xl profile-name">Zulaikha</div>
                         <div className="text-xs profile-email">zulaikha17@gmail.com</div>
                         <div className="text-base profile-email mt-6">Has been ordered 15 products</div>
@@ -131,7 +231,7 @@ class Profile extends Component{
                                 </button>
                             </div>
                         </div>
-                        <form className="flex flex-col flex-wrap w-full py-8 h-4/6">
+                        <div className="flex flex-col flex-wrap w-full py-8 h-4/6">
                             <label className="profile-label text-lg pr-2">Email adress:</label>
                             <input className="focus:outline-none profile-input" value={this.state.email} onChange={(e) => {this.setState({ email:e.target.value })}} type="email" id="email" name="email" placeholder="Enter your value"/>
 
@@ -140,7 +240,7 @@ class Profile extends Component{
 
                             <label className="profile-label text-lg pr-2">Mobile number:</label>
                             <input className="focus:outline-none profile-input" value={this.state.phone_number} onChange={(e) => {this.setState({ phone_number:e.target.value })}} type="text" id="phone_number" name="phone_number" placeholder="Enter your value"/>
-                        </form>
+                        </div>
                     </div>
                 </div>
                 <div className="flex flex-row w-full h-3/6 mb-16">
@@ -153,7 +253,7 @@ class Profile extends Component{
                                 </button>
                             </div>
                         </div>
-                        <form className="flex flex-col flex-wrap w-full h-5/6">
+                        <div className="flex flex-col flex-wrap w-full h-5/6">
                             <label className="profile-label text-lg pr-2 py-4">Display name:</label>
                             <input className="focus:outline-none profile-input" value={this.state.display_name} onChange={(e) => {this.setState({ display_name:e.target.value })}} type="text" id="d-name" name="d-name" placeholder="Enter your value"/>
 
@@ -164,22 +264,22 @@ class Profile extends Component{
                             <input className="focus:outline-none profile-input" value={this.state.last_name} onChange={(e) => {this.setState({ last_name:e.target.value })}} type="text" id="l-name" name="l-name" placeholder="Enter your value"/>
 
                             <label className="profile-label text-lg pr-2 py-4">DD/MM/YY:</label>
-                            <input className="focus:outline-none profile-input" value="1990-04-03" type="date" id="l-name" name="l-name" placeholder="Enter your value"/>
+                            <input className="focus:outline-none profile-input" defaultValue="1990-04-03" type="date" id="l-name" name="l-name" placeholder="Enter your value"/>
 
                             <label className="profile-rb text-lg pl-8 mb-4 mt-8">Male
-                                <input type="radio" id="male" name="gender" value="male"/>
+                                <input type="radio" id="male"  name="gender"/>
                                 <span className="checkmark"></span>
                             </label>
 
                             <label className="profile-rb text-lg pl-8 my-4">Female
-                                <input type="radio" id="female" name="gender" value="female"/>
+                                <input type="radio" id="female" name="gender"/>
                                 <span className="checkmark"></span>
                             </label>
-                        </form>
+                        </div>
                     </div>
                     <div className="flex flex-col w-2/6 px-4">
                         <div className="flex justify-center items-center profile-title-2">Do you want to save the change?</div>
-                        <button className="focus:outline-none my-4 shadow-md profile-button-b" type="submit">Save change</button>
+                        <button onClick={this.changeUser} className="focus:outline-none my-4 shadow-md profile-button-b" type="submit">Save change</button>
                         <button className="focus:outline-none mt-1 mb-8 shadow-md profile-button-y">Cancel</button>
                         <button onClick={this.openModal} className="focus:outline-none my-4 shadow-md profile-button-w">Change Password</button>
                         <button onClick={this.logout} className="focus:outline-none mt-1 mb-4 shadow-md profile-button-w">Log out</button>
@@ -219,7 +319,8 @@ const mapDispatchToProps = {
     getUserById,
     changePassword,
     authLogout,
-    userLogout
+    userLogout,
+    changeUser
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile)

@@ -30,6 +30,18 @@ const user = (state=initialState, action) => {
                 msg: action.payload
             }
         }
+        case 'CHANGE_USER' : {
+            return {
+                ...state,
+                msg: action.payload
+            }
+        }
+        case 'CHANGE_USER_FAILED': {
+            return {
+                ...state,
+                msg: action.payload
+            }
+        }
         case 'USER_LOGOUT' : {
             return {
                 ...state,
