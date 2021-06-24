@@ -222,9 +222,8 @@ class Profile extends Component{
                         :
                         <></>
                         }
-                        <div className="text-xl profile-name">Zulaikha</div>
-                        <div className="text-xs profile-email">zulaikha17@gmail.com</div>
-                        <div className="text-base profile-email mt-6">Has been ordered 15 products</div>
+                        <div className="text-xl profile-name">{this.props.user.data[0].display_name}</div>
+                        <div className="text-xs profile-email">{this.props.user.data[0].email}</div>
                     </div>
                     <div className="flex flex-col w-8/12 bg-white py-4 px-8 rounded-md profile-border">
                         <div className="flex flex-row w-full h-1/6">

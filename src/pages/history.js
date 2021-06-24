@@ -4,7 +4,7 @@ import Card from '../components/history/card'
 import Header from '../components/header'
 import Footer from '../components/footer'
 import Modal from 'react-modal'
-import Loader from 'react-loader-spinner'
+// import Loader from 'react-loader-spinner'
 
 import { withRouter } from 'react-router-dom'
 
@@ -168,20 +168,15 @@ function History(props){
             </div>
             :
             <div className="flex flex-col w-full justify-center items-center text-center history-wrap">
-                <Loader
-                type='TailSpin'
-                color="#fff"
-                height={50}
-                width={100}
-                />
+                <div className="flex flex-col justify-center items-center h-1/5 w-full my-24">
+                    <h1 className="text-4xl font-bold history-font text-white">You haven't bought coffee :)</h1>
+                </div>
             </div>
             }
             <Footer/>
         </div>
     );
 }
-
-// export default History;
 
 const mapStateToProps = state =>({
   auth: state.auth,
