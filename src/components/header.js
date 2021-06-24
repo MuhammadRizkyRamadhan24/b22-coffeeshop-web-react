@@ -33,6 +33,15 @@ class Header extends Component{
         this.props.history.push('/profile')
     }
 
+    getDataUser = () => {
+        const {token} = this.props.auth
+        this.props.getUserById(token)
+    }
+
+    componentDidMount(){
+        this.getDataUser()
+    }
+
     render(){
         const {token} = this.props.auth
         
@@ -76,6 +85,7 @@ class Header extends Component{
                         :
                          
                         <>
+                            <button onClick={() => this.props.history.push('/signup')} className="focus:outline-none history-font text-xs">Sign Up</button>
                             <ButtonMini page="Login" definition="login" history={this.props.history}/>
                         </>
                         }
