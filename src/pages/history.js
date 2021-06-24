@@ -88,6 +88,7 @@ function History(props){
       props.getHistory(token);
     }
     getHistory()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },  [])
 
     return (

@@ -7,6 +7,7 @@ import Loader from 'react-loader-spinner'
 
 import { connect } from 'react-redux'
 import { deleteAllItems } from '../redux/actions/carts'
+import { getUserById } from '../redux/actions/user'
 import { createTransaction } from '../redux/actions/transaction'
 
 import '../styles/page-payDel.css'
@@ -114,11 +115,17 @@ class Payment extends Component{
         })
     }
 
-    async componentDidMount(){
+    getDataUser = () => {
+        const {token} = this.props.auth
+        this.props.getUserById(token)
+    }
+
+    componentDidMount(){
+        this.getDataUser()
         if (this.props.carts.items.length > 0){
-            await this.setData()
+            this.setData()
         } else {
-            await this.setState({
+            this.setState({
                 subTotal: 0,
                 total: 0
             })
@@ -238,6 +245,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
+    getUserById,
     createTransaction,
     deleteAllItems
 }

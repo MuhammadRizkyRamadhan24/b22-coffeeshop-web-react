@@ -30,6 +30,14 @@ const user = (state=initialState, action) => {
                 msg: action.payload
             }
         }
+        case 'USER_LOGOUT' : {
+            return {
+                ...state,
+                data: [],
+                msg: '',
+                errMsg: ''
+            }
+        }
         default: {
             return {
                 ...state

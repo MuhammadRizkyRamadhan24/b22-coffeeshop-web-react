@@ -9,7 +9,8 @@ const auth = (state=initialState, action) => {
         case 'AUTH_LOGIN' : {
             return {
                 ...state,
-                token: action.payload.token
+                token: action.payload.token,
+                errMsg: ''
             }
         }
         case 'AUTH_LOGIN_FAILED': {

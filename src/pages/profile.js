@@ -8,7 +8,7 @@ import Swal from 'sweetalert2'
 import '../styles/page-profile.css';
 
 import { connect } from 'react-redux'
-import { changePassword } from '../redux/actions/user'
+import { changePassword, getUserById, userLogout } from '../redux/actions/user'
 import { authLogout } from '../redux/actions/auth'
 
 class Profile extends Component{
@@ -26,18 +26,6 @@ class Profile extends Component{
             newPassword: '',
             modalIsOpen: false
         }
-    }
-
-    setDataFirst = () =>{
-        this.setState({
-            email: this.props.user.data[0].email,
-            image: this.props.user.data[0].image,
-            phone_number: this.props.user.data[0].phone_number,
-            address: this.props.user.data[0].address,
-            display_name: this.props.user.data[0].display_name,
-            first_name: this.props.user.data[0].first_name,
-            last_name: this.props.user.data[0].last_name
-        })
     }
 
     openModal = () => {
@@ -78,10 +66,27 @@ class Profile extends Component{
 
     logout = () => {
         this.props.authLogout()
+        this.props.userLogout()
+    }
+
+    getDataUser = () => {
+        const {token} = this.props.auth
+        this.props.getUserById(token)
+        .then((res) =>{
+            this.setState({
+                email: this.props.user.data[0].email,
+                image: this.props.user.data[0].image,
+                phone_number: this.props.user.data[0].phone_number,
+                address: this.props.user.data[0].address,
+                display_name: this.props.user.data[0].display_name,
+                first_name: this.props.user.data[0].first_name,
+                last_name: this.props.user.data[0].last_name
+            })
+        })
     }
 
     componentDidMount(){
-        this.setDataFirst()
+        this.getDataUser()
     }
 
     render(){
@@ -99,6 +104,7 @@ class Profile extends Component{
               backgroundColor: 'rgba(52, 52, 52, 0.8)'
             }
           }
+          console.log(this.state.image);
         return(
         <div className="flex flex-col min-h-full">
 
@@ -109,9 +115,9 @@ class Profile extends Component{
                 <div className="flex flex-row w-full h-2/6 mb-16">
                     <div className="flex flex-col w-4/12 bg-white py-4 mr-8 rounded-md profile-border justify-center items-center">
                         <img className="rounded-full w-36 h-36" src={`http://localhost:8880/static/images/${this.state.image}`} alt=" "/>
-                        <button href="#ChangePhoto" className="focus:outline-none flex justify-center items-center rounded-full h-8 w-8 mr-3 profile-bi profile-bi-p">
+                        {/* <button href="#ChangePhoto" className="focus:outline-none flex justify-center items-center rounded-full h-8 w-8 mr-3 profile-bi profile-bi-p">
                             <FaPencilAlt className="text-white" />
-                        </button>
+                        </button> */}<input className='flex justify-center items-center rounded-full h-8 w-8 mr-3 profile-bi profile-bi-p' name='image' onChange={(e) => this.setState({image :e.target.files})} type="file"/>
                         <div className="text-xl profile-name">Zulaikha</div>
                         <div className="text-xs profile-email">zulaikha17@gmail.com</div>
                         <div className="text-base profile-email mt-6">Has been ordered 15 products</div>
@@ -210,8 +216,10 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
+    getUserById,
     changePassword,
-    authLogout
+    authLogout,
+    userLogout
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile)
