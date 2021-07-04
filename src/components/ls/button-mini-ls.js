@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
-
 import '../../styles/page-ls.css';
 
-class Form extends Component{
-    goToDefinition = () =>{
-        this.props.history.push(`/${this.props.definition}`)
-    }
+// eslint-disable-next-line react/prefer-stateless-function
+class Form extends Component {
+  goToDefinition = () => {
+    const { history, definition } = this.props;
+    history.push(`/${definition}`);
+  }
 
-    render(){
-        return(
-            <>
-                <button className="focus:outline-none rounded-full ls-buttonTop" onClick={this.goToDefinition}>{this.props.page}</button>
-            </>
-        )
-    }
+  render() {
+    const { page } = this.props;
+    return (
+      <>
+        <button type="button" className="focus:outline-none rounded-full ls-buttonTop" onClick={this.goToDefinition}>{page}</button>
+      </>
+    );
+  }
 }
 
-export default Form
+export default Form;

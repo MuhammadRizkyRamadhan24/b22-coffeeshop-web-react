@@ -1,45 +1,43 @@
-import React, { Component } from 'react'
-import logo from '../assets/images/logo.png'
-import textLogo from '../assets/images/textLogo.png'
-import ButtonMini from '../components/ls/button-mini-ls'
-import img from '../assets/images/profile.jpg'
-
-import { FaSearch, FaEnvelope } from 'react-icons/fa'
-
+/* eslint-disable */
+import React, { Component } from 'react';
+import { FaSearch, FaEnvelope } from 'react-icons/fa';
+import { connect } from 'react-redux';
+import { getUserById } from '../redux/actions/user';
+import logo from '../assets/images/logo.png';
+import textLogo from '../assets/images/textLogo.png';
+import ButtonMini from './ls/button-mini-ls';
+import img from '../assets/images/profile.jpg';
 import '../styles/header.css';
 
-import { connect }  from 'react-redux'
-import { getUserById } from '../redux/actions/user'
-
-class Header extends Component{
-
-    goToHome = () =>{
-        this.props.history.push('/')
-    }
+class Header extends Component {
     
     goToProduct = () =>{
-        this.props.history.push('/product')
+      this.props.history.push('/product')
     }
     
     goToCart = () =>{
-        this.props.history.push('/payment')
+      this.props.history.push('/payment')
     }
     
     goToHistory = () =>{
-        this.props.history.push('/history')
+      this.props.history.push('/history')
     }
 
     goToProfile = () =>{
-        this.props.history.push('/profile')
+      this.props.history.push('/profile')
     }
 
     getDataUser = () => {
-        const {token} = this.props.auth
-        this.props.getUserById(token)
+      const {token} = this.props.auth
+      this.props.getUserById(token)
     }
 
     componentDidMount(){
-        this.getDataUser()
+      this.getDataUser()
+    }
+
+    goToHome = () =>{
+      this.props.history.push('/')
     }
 
     render(){

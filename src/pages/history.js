@@ -1,56 +1,57 @@
-// import React, { useState, useEffect } from 'react'
-import React, { useEffect } from 'react'
-import Card from '../components/history/card'
-import Header from '../components/header'
-import Footer from '../components/footer'
-import Modal from 'react-modal'
+import React, { useEffect } from 'react';
+import Modal from 'react-modal';
+import Swal from 'sweetalert2';
 
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 
-import { connect } from 'react-redux'
-import { getHistory, getDetailHistory } from '../redux/actions/transaction'
+import { connect } from 'react-redux';
+import Footer from '../components/footer';
+import Header from '../components/header';
+import Card from '../components/history/card';
+import { getHistory, getDetailHistory, deleteTransaction } from '../redux/actions/transaction';
 
-import '../styles/page-ls.css'
+import '../styles/page-ls.css';
 
 const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)',
-    borderRadius          : '18px'
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    borderRadius: '18px',
   },
   overlay: {
-    backgroundColor: 'rgba(52, 52, 52, 0.8)'
-  }
+    backgroundColor: 'rgba(52, 52, 52, 0.8)',
+  },
 };
 
 const customStyles2 = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)',
-    borderRadius          : '18px'
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    borderRadius: '18px',
   },
   overlay: {
-    backgroundColor: 'rgba(52, 52, 52, 0.1)'
-  }
+    backgroundColor: 'rgba(52, 52, 52, 0.1)',
+  },
 };
 
-function History(props){
-  const [modalIsOpen,setIsOpen] = React.useState(false);
-  const [modalDetailIsOpen,setDetailIsOpen] = React.useState(false);
+function History(props) {
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [modalDetailIsOpen, setDetailIsOpen] = React.useState(false);
+  const [forUpdate, setForUpdate] = React.useState(false);
 
   function openModal() {
     setIsOpen(true);
   }
 
-  function closeModal(){
+  function closeModal() {
     setIsOpen(false);
   }
 
@@ -58,127 +59,199 @@ function History(props){
     setDetailIsOpen(true);
   }
 
-  function closeDetailModal(){
+  function closeDetailModal() {
     setDetailIsOpen(false);
   }
 
-  
+  const deleteHistory = (id) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Delete History?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#6A4029',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const { token } = props.auth;
+        props.deleteTransaction(token, id)
+          .then(() => {
+            setForUpdate(!forUpdate);
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Success delete history!',
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            closeDetailModal();
+          }).catch((err) => {
+            console.log(err);
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong',
+            });
+          });
+      }
+    });
+  };
 
   const getHistoryDetail = (id) => {
-    const {token} = props.auth
-    props.getDetailHistory(token, id)
-  }
+    const { token } = props.auth;
+    props.getDetailHistory(token, id);
+  };
 
   const buttonHistory = async (id) => {
-    await getHistoryDetail(id)
-    openDetailModal()
-  }
+    await getHistoryDetail(id);
+    openDetailModal();
+  };
 
-  useEffect (()=>{
-    const getHistory = () => {
-      const {token} = props.auth
-      props.getHistory(token);
-    }
-    getHistory()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  },  [])
+  const getHistoryByUser = () => {
+    const { token } = props.auth;
+    props.getHistory(token);
+  };
 
-    return (
-        <div className="flex flex-col min-h-full">
-            <Modal
-            isOpen={modalIsOpen}
-            onRequestClose={closeModal}
-            style={customStyles}
-            ariaHideApp={false}
-            >
-                <div className="flex flex-col justify-center items-center h-48 w-96">
-                    <p className="text-xl text-center h-2/6 font-normal history-font m-5">Are you sure want to delete the all items?</p>
-                    <div className="flex flex-row justify-center items-center w-full">
-                        <button onClick={closeModal} className="focus:outline-none profile-button-w mr-8">Cancel</button>
-                        <button className="focus:outline-none profile-button-b ml-8">Delete</button>
-                    </div>
-                </div>
-            </Modal>
-                
-            <Header history={props.history}/>
-            {props.transaction.data.length > 0 ?
-            <div className="flex flex-col w-full justify-center items-center text-center history-wrap">
-                <div className="flex flex-col justify-center items-center h-1/5 w-full my-24">
-                    <h1 className="text-4xl font-bold history-font text-white">Let’s see what you have bought!</h1>
-                    <p className="text-xl font-normal history-font text-white">Select item to delete</p>
-                </div>
-                <div className="flex flex-row justify-end items-center w-full px-10">
-                    <button onClick={openModal} className="focus:outline-none text-white history-font p-2">Delete All</button>
-                </div>
-                <div className="grid grid-cols-3 gap-4 h-4/5 w-full p-16">
-                  {props.transaction.data.length > 0 ? 
-                  props.transaction.data.map((d,i) => (
-                    <div key={d.id}>
-                      <Card code={d.code} total={d.total} tax={d.tax} func={() => buttonHistory(d.id)} shipping_cost={d.shipping_cost}/>
-                      <Modal
+  useEffect(() => {
+    getHistoryByUser();
+  }, [forUpdate]);
+  return (
+    <div className="flex flex-col min-h-full">
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        style={customStyles}
+        ariaHideApp={false}
+      >
+        <div className="flex flex-col justify-center items-center h-48 w-96">
+          <p className="text-xl text-center h-2/6 font-normal history-font m-5">Are you sure want to delete the all items?</p>
+          <div className="flex flex-row justify-center items-center w-full">
+            <button type="button" onClick={closeModal} className="focus:outline-none profile-button-w mr-8">Cancel</button>
+            <button type="button" className="focus:outline-none profile-button-b ml-8">Delete</button>
+          </div>
+        </div>
+      </Modal>
+
+      <Header history={props.history} />
+      {props.transaction.data.length > 0
+        ? (
+          <div className="flex flex-col w-full justify-center items-center text-center history-wrap">
+            <div className="flex flex-col justify-center items-center h-1/5 w-full my-24">
+              <h1 className="text-4xl font-bold history-font text-white">Let’s see what you have bought!</h1>
+              <p className="text-xl font-normal history-font text-white">Select item to delete</p>
+            </div>
+            <div className="flex flex-row justify-end items-center w-full px-10">
+              <button type="button" onClick={openModal} className="focus:outline-none text-white history-font p-2">Delete All</button>
+            </div>
+            <div className="grid grid-cols-3 gap-4 h-4/5 w-full p-16">
+              {props.transaction.data.length > 0
+                ? props.transaction.data.map((d) => (
+                  <div key={d.id}>
+                    <Card code={d.code} total={d.total} tax={d.tax} func={() => buttonHistory(d.id)} shipping_cost={d.shipping_cost} />
+                    <Modal
                       isOpen={modalDetailIsOpen}
                       onRequestClose={closeDetailModal}
                       style={customStyles2}
                       ariaHideApp={false}
-                      >
-                          <div className="flex flex-col justify-center items-center h-96 w-96">
-                            <div className="text-xl font-bold history-font">{props.transaction.detailData.code}</div>
-                            <div className="flex flex-col h-48 w-80 overflow-y-auto">
-                              {typeof props.transaction.detailData === 'object' ?
-                                  props.transaction.detailData.items.map((d,i)=> (
-                                  <div key={d.id} className="flex flex-row my-4 mx-4 text-lg items-center">
-                                      <img className="w-20 h-20 rounded-full mr-4" src={`http://localhost:8880/static/images/${d.image}`} alt=""/>
-                                      <div className="flex flex-col w-full pr-4 history-font">
-                                          <p>{d.item_name}</p>
-                                          <p>({d.amount})</p>
-                                          <p>{d.variant}</p>
-                                      </div>
-                                      <div className="flex justify-end items-center text-center history-font">
-                                          <p>IDR {d.price}</p>
-                                      </div>
-                                  </div>
-                                  ))
-                              :
-                              <></>
-                              }
-                            </div>
-                            <div className="text-left w-72 h-auto text-sm font-normal history-font"> Shipping Cost : IDR {props.transaction.detailData.shipping_cost}</div>
-                            <div className="text-left w-72 h-auto text-sm font-normal history-font"> Tax : IDR {props.transaction.detailData.tax}</div>
-                            <div className="text-left w-72 h-auto text-sm font-bold pb-2 history-font"> Total : IDR {props.transaction.detailData.total}</div>
-                            <div className="text-left w-72 h-auto text-sm font-normal history-font"> Shipping Address : {props.transaction.detailData.shipping_address}.</div>
-                            <div className="text-left w-72 text-sm font-normal history-font">Payment Method : {props.transaction.detailData.payment_method}</div>
-                            <button onClick={closeDetailModal} className="focus:outline-none w-48 py-2 my-2 font-bold profile-button-white">Close</button>
-                          </div>
-                      </Modal>
-                    </div>
-                  ))
-                  :
+                    >
+                      <div className="flex flex-col justify-center items-center h-96 w-96">
+                        <div className="text-xl font-bold history-font">{props.transaction.detailData.code}</div>
+                        <div className="flex flex-col h-48 w-80 overflow-y-auto">
+                          {typeof props.transaction.detailData === 'object'
+                            ? props.transaction.detailData.items.map((v) => (
+                              <div key={v.id} className="flex flex-row my-4 mx-4 text-lg items-center">
+                                <img className="w-20 h-20 rounded-full mr-4" src={`http://localhost:8880/static/images/${v.image}`} alt="" />
+                                <div className="flex flex-col w-full pr-4 history-font">
+                                  <p>{v.item_name}</p>
+                                  <p>
+                                    (
+                                    {v.amount}
+                                    )
+                                  </p>
+                                  <p>{v.variant}</p>
+                                </div>
+                                <div className="flex justify-end items-center text-center history-font">
+                                  <p>
+                                    IDR
+                                    {' '}
+                                    {d.price}
+                                  </p>
+                                </div>
+                              </div>
+                            ))
+                            : <></>}
+                        </div>
+                        <div className="text-left w-72 h-auto text-sm font-normal history-font">
+                          {' '}
+                          Shipping Cost : IDR
+                          {' '}
+                          {props.transaction.detailData.shipping_cost}
+                        </div>
+                        <div className="text-left w-72 h-auto text-sm font-normal history-font">
+                          {' '}
+                          Tax : IDR
+                          {' '}
+                          {props.transaction.detailData.tax}
+                        </div>
+                        <div className="text-left w-72 h-auto text-sm font-bold pb-2 history-font">
+                          {' '}
+                          Total : IDR
+                          {' '}
+                          {props.transaction.detailData.total}
+                        </div>
+                        <div className="text-left w-72 h-auto text-sm font-normal history-font">
+                          {' '}
+                          Shipping Address :
+                          {' '}
+                          {props.transaction.detailData.shipping_address}
+                          .
+                        </div>
+                        <div className="text-left w-72 text-sm font-normal history-font">
+                          Payment Method :
+                          {' '}
+                          {props.transaction.detailData.payment_method}
+                        </div>
+
+                        <div className="flex flex-row justify-center items-center w-full">
+                          <button type="button" onClick={closeDetailModal} className="focus:outline-none w-24 py-2 m-2 font-bold history-button-white">Close</button>
+                          <button type="button" onClick={() => deleteHistory(props.transaction.detailData.id)} className="focus:outline-none w-24 py-2 m-2 font-bold history-button-brown">Delete</button>
+                        </div>
+                        {/* <button onClick={closeDetailModal} className="focus:outline-none w-48 py-2 my-2 font-bold profile-button-white">Close</button>
+                            <button onClick={closeDetailModal} className="focus:outline-none w-48 py-2 my-2 font-bold profile-button-white">Close</button> */}
+                      </div>
+                    </Modal>
+                  </div>
+                ))
+                : (
                   <>
                   </>
-                  }
-                </div>
+                )}
             </div>
-            :
-            <div className="flex flex-col w-full justify-center items-center text-center history-wrap">
-                <div className="flex flex-col justify-center items-center h-1/5 w-full my-24">
-                    <h1 className="text-4xl font-bold history-font text-white">You haven't bought coffee :)</h1>
-                </div>
+          </div>
+        )
+        : (
+          <div className="flex flex-col w-full justify-center items-center text-center history-wrap">
+            <div className="flex flex-col justify-center items-center h-1/5 w-full my-24">
+              <h1 className="text-4xl font-bold history-font text-white">You haven&apos;t bought coffee :)</h1>
             </div>
-            }
-            <Footer/>
-        </div>
-    );
+          </div>
+        )}
+      <Footer />
+    </div>
+  );
 }
 
-const mapStateToProps = state =>({
+const mapStateToProps = (state) => ({
   auth: state.auth,
-  transaction: state.transaction
+  transaction: state.transaction,
 });
 
 const mapDispatchToProps = {
   getHistory,
-  getDetailHistory
+  getDetailHistory,
+  deleteTransaction,
 };
-const pushRoute = withRouter(History)
+const pushRoute = withRouter(History);
 
-export default connect(mapStateToProps,mapDispatchToProps)(pushRoute);
+export default connect(mapStateToProps, mapDispatchToProps)(pushRoute);

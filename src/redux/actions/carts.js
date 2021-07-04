@@ -1,13 +1,10 @@
-export const addItems = (data) => {
-    return {
-        type: 'CARTS_ADD_ITEM',
-        payload: data
-    }
-}
+/* eslint-disable */
+export const addItems = (data) => ({
+  type: 'CARTS_ADD_ITEM',
+  payload: data,
+});
 
-export const deleteAllItems = () => {
-    return {
-        type : 'CARTS_DELETE_ALL_ITEMS',
-        payload : []
-    }
-}
+export const deleteAllItems = () => ({
+  type: 'CARTS_DELETE_ALL_ITEMS',
+  payload: [],
+});

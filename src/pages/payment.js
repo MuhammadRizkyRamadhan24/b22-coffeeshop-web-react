@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from 'react'
 import Header from '../components/header'
 import Footer from '../components/footer'
@@ -99,7 +100,7 @@ class Payment extends Component{
                     Swal.fire({
                         position: 'center',
                         icon: 'success',
-                        title: 'Success created transaction!',
+                        title: 'Successful payment!',
                         showConfirmButton: false,
                         timer: 1500
                     })
@@ -115,13 +116,13 @@ class Payment extends Component{
         })
     }
 
-    getDataUser = () => {
-        const {token} = this.props.auth
-        this.props.getUserById(token)
-    }
+    // getDataUser = () => {
+    //     const {token} = this.props.auth
+    //     this.props.getUserById(token)
+    // }
 
     componentDidMount(){
-        this.getDataUser()
+        // this.getDataUser()
         if (this.props.carts.items.length > 0){
             this.setData()
         } else {

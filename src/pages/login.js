@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import Background from '../components/ls/background-ls'

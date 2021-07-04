@@ -5,6 +5,12 @@
     background-position: center;
 }
 
+.home-wrap-2{
+    height: auto;
+    background: #fdfdfd;
+}
+
+
 .home-font{
     font-family: 'Rubik', sans-serif;
 }

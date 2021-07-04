@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from 'react'
 import Header from '../components/header'
 import Footer from '../components/footer'
@@ -152,7 +153,7 @@ class ProductDetail extends Component{
                     <div className="flex flex-col w-4/6 ml-10 mt-5">
                         <div className="flex flex-col w-full h-4/6 px-20 py-12 rounded-2xl bg-white">
                             <div className="text-xl productDetail-font-p productDetail-textDel brown">
-                                {this.props.product.detailData.delivery}
+                                Delivery : {this.props.product.detailData.delivery}
                             </div>
                             <p className="text-xl productDetail-font-p productDetail-detailDel brown my-4">
                                 {this.props.product.detailData.detail}

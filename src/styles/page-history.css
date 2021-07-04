@@ -24,7 +24,7 @@
     cursor: pointer;
 }
 
-.profile-button-w{
+.history-button-w{
     background-color: #fff;
     border: 2px solid #6A4029;
     border-radius: 1rem;
@@ -38,9 +38,16 @@
     cursor: pointer;
 }
 
-.profile-button-white{
+.history-button-white{
     background-color: #fff;
     border: 2px solid #6A4029;
     border-radius: 1rem;
     color: #6A4029;
+}
+
+.history-button-brown{
+    background-color: #6A4029;
+    border: 2px solid #fff;
+    border-radius: 1rem;
+    color: #fff;
 }
