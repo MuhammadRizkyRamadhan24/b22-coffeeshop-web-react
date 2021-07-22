@@ -1,8 +1,6 @@
-/* eslint-disable */
 import React, { Component } from 'react';
-
 import '../../styles/page-productDetail.css';
-
+// eslint-disable-next-line react/prefer-stateless-function
 class Img extends Component {
   render() {
     return (

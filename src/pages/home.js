@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import { FaCheckCircle, FaStar } from 'react-icons/fa';
 import { FcCheckmark } from 'react-icons/fc';
@@ -36,7 +35,7 @@ class Home extends Component {
               <p className="text-lg home-font font-normal text-white my-2">
                 We provide high quality beans, good taste, and healthy meals made by love just for you. Start your day with us for a bigger smile!
               </p>
-              <button className="focus:outline-none font-bold home-button-y w-60 my-4 home-font">
+              <button type="button" className="focus:outline-none font-bold home-button-y w-60 my-4 home-font">
                 Get Started
               </button>
 
@@ -111,7 +110,7 @@ class Home extends Component {
                 </div>
                 <div className="flex flex-col h-20 mb-10 justify-center items-center">
                   <h1 className="font-semibold text-lg pb-3">IDR 25.000</h1>
-                  <button className="focus:outline-none text-xs hover:bg-yellow-400 hover:text-white bg-white border-yellow-400 border-2 rounded-full py-2 px-10 font-semibold text-yellow-900">Order Now</button>
+                  <button type="button" className="focus:outline-none text-xs hover:bg-yellow-400 hover:text-white bg-white border-yellow-400 border-2 rounded-full py-2 px-10 font-semibold text-yellow-900">Order Now</button>
                 </div>
               </div>
 
@@ -146,7 +145,7 @@ class Home extends Component {
                 </div>
                 <div className="flex flex-col h-20 mb-10 justify-center items-center">
                   <h1 className="font-semibold text-lg pb-3">IDR 30.000</h1>
-                  <button className="focus:outline-none text-xs hover:bg-yellow-400 hover:text-white bg-white border-yellow-400 border-2 rounded-full py-2 px-10 font-semibold text-yellow-900">Order Now</button>
+                  <button type="button" className="focus:outline-none text-xs hover:bg-yellow-400 hover:text-white bg-white border-yellow-400 border-2 rounded-full py-2 px-10 font-semibold text-yellow-900">Order Now</button>
                 </div>
               </div>
 
@@ -185,7 +184,7 @@ class Home extends Component {
                 </div>
                 <div className="flex flex-col h-20 mb-10 justify-center items-center">
                   <h1 className="font-semibold text-lg pb-3">IDR 40.000</h1>
-                  <button className="focus:outline-none hover:bg-yellow-400 hover:text-white text-xs bg-white border-yellow-400 border-2 rounded-full py-2 px-10 font-semibold text-yellow-900">Order Now</button>
+                  <button type="button" className="focus:outline-none hover:bg-yellow-400 hover:text-white text-xs bg-white border-yellow-400 border-2 rounded-full py-2 px-10 font-semibold text-yellow-900">Order Now</button>
                 </div>
               </div>
             </div>

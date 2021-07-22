@@ -1,4 +1,3 @@
-/* eslint-disable */
 export const addItems = (data) => ({
   type: 'CARTS_ADD_ITEM',
   payload: data,

@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 

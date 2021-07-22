@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { http } from '../../helpers/http';
 
 const { REACT_APP_BASE_URL: URL } = process.env;

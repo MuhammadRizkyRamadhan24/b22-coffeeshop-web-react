@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-/* eslint-disable */
 import { Link } from 'react-router-dom';
 import '../../styles/page-product.css';
-
+// eslint-disable-next-line react/prefer-stateless-function
 class Card extends Component {
   render() {
     return (

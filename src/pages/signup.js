@@ -1,27 +1,24 @@
-/* eslint-disable */
-import React, { Component } from 'react'
-import Swal from 'sweetalert2'
-import Background from '../components/ls/background-ls'
-import Logo from '../components/ls/logo-ls'
-import ButtonMini from '../components/ls/button-mini-ls'
-import Form from '../components/ls/form-ls'
-import ButtonForm from '../components/ls/button-form-ls'
-import Footer from '../components/footer'
-import { FaGoogle } from 'react-icons/fa'
-
-import '../styles/page-ls.css'
-
-import { connect } from 'react-redux'
-import { authRegister } from '../redux/actions/auth'
+import React, { Component } from 'react';
+import Swal from 'sweetalert2';
+import { FaGoogle } from 'react-icons/fa';
+import { connect } from 'react-redux';
+import Background from '../components/ls/background-ls';
+import Logo from '../components/ls/logo-ls';
+import ButtonMini from '../components/ls/button-mini-ls';
+import Form from '../components/ls/form-ls';
+import ButtonForm from '../components/ls/button-form-ls';
+import Footer from '../components/footer';
+import '../styles/page-ls.css';
+import { authRegister } from '../redux/actions/auth';
 
 class Signup extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       email: '',
       phone_number: '',
       password: ''
-    }
+    };
   }
 
   // handleLogin = (event) => {
@@ -46,8 +43,8 @@ class Signup extends Component {
   // }
 
   onRegister = (e) => {
-    e.preventDefault()
-    const { email, phone_number, password } = this.state
+    e.preventDefault();
+    const { email, phone_number, password } = this.state;
     this.props.authRegister(email, phone_number, password)
       .then(() => {
         Swal.fire({
@@ -57,26 +54,26 @@ class Signup extends Component {
           showConfirmButton: false,
           timer: 2000,
         });
-        this.props.history.push('/login')
-      })
+        this.props.history.push('/login');
+      });
   }
 
   changeEmail = (e) => {
     this.setState({
       email: e.target.value
-    })
+    });
   }
 
   changePassword = (e) => {
     this.setState({
       password: e.target.value
-    })
+    });
   }
 
   changePhoneNumber = (e) => {
     this.setState({
       phone_number: e.target.value
-    })
+    });
   }
 
   // componentDidUpdate(){
@@ -87,7 +84,7 @@ class Signup extends Component {
   // }
 
   render() {
-    const { errMsg } = this.props.auth
+    const { errMsg } = this.props.auth;
     return (
       <div className="flex flex-col ls-wrap">
         <div className="flex flex-col md:flex-row w-full ls-hw">
@@ -106,11 +103,7 @@ class Signup extends Component {
             </div>
             <div className="flex flex-col h-auto w-full items-center justify-center px-10 md:px-32">
               <div className="ls-titleForm">Sign Up</div>
-              {errMsg !== '' &&
-                <div className='bg-red-300 text-red-600 font-bold w-full px-5 py-5 m-2 rounded-full'>
-                  {errMsg}
-                </div>
-              }
+              {errMsg !== '' && <div className="bg-red-300 text-red-600 font-bold w-full px-5 py-5 m-2 rounded-full">{errMsg}</div>}
               <form onSubmit={this.onRegister} className="w-full text-lg md:text-2xl ls-form">
                 <Form type="email" id="email" name="email" placeholder="Enter your email adress" value={this.state.email} func={this.changeEmail} label="Email Adress:" />
                 <Form type="password" id="password" name="password" placeholder="Enter your password" value={this.state.password} func={this.changePassword} label="Password:" />
@@ -118,38 +111,39 @@ class Signup extends Component {
 
                 <ButtonForm page="Sign Up" />
               </form>
-              <a className="flex justify-center items-center shadow-md ls-button-g" href="http://google.com"><FaGoogle className="pr-1" />Sign Up with Google</a>
+              <a className="flex justify-center items-center shadow-md ls-button-g" href="http://google.com">
+                <FaGoogle className="pr-1" />
+                Sign Up with Google
+              </a>
             </div>
           </div>
         </div>
 
-        <div className="absolute w-full h-52 flex px-10 md:px-32 justify-center items-center top-1/4 md:top-full" >
+        <div className="absolute w-full h-52 flex px-10 md:px-32 justify-center items-center top-1/4 md:top-full">
           <div className="flex flex-col md:flex-row items-center rounded-2xl bg-white shadow-xl w-full h-full">
             <div className="flex flex-col w-full md:w-4/6 h-full px-14 py-11 md:px-14 md:py-12">
               <p className="text-xl md:text-4xl w-48 md:w-80 ls-font-r font-bold py-2">Get your member card now!</p>
-              <p className="text-md ls-font-r py-2">Let's join with our member and enjoy the deals.</p>
+              <p className="text-md ls-font-r py-2">Let&quot;s join with our member and enjoy the deals.</p>
             </div>
             <div className="flex flex-col w-full md:w-2/6 h-full md:h-2/6 px-14 py-12 justify-center items-center">
               <a className="my4 shadow-md ls-button" href=" ">Create Now </a>
             </div>
           </div>
         </div>
-
         <Footer />
-
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth
-})
+});
 
 const mapDispatchToProps = {
   authRegister
-}
+};
 
 // export default Signup
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signup)
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

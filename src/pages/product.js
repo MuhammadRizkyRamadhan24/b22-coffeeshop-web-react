@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from '../components/header';
@@ -16,35 +15,33 @@ class Product extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
-      category: [],
-      id: '',
-      loading: true,
+      // data: [],
+      // category: [],
+      // id: '',
+      // loading: true,
       status: ''
     };
   }
 
-  getDataByCategories = (id, name) => {
-    const { token } = this.props.auth
-    this.props.getDataByCategories(id, token)
-    this.setState({
-      status: name
-    })
-
+  componentDidMount() {
+    this.getCategory();
+    this.getDataByCategories(1, 'Favorite Product');
   }
 
   getCategory = () => {
-    const { token } = this.props.auth
-    this.props.getCategory(token)
-    this.setState({
-      loading: false
-    })
-
+    const { token } = this.props.auth;
+    this.props.getCategory(token);
+    // this.setState({
+    //   loading: false
+    // });
   }
 
-  componentDidMount() {
-    this.getCategory()
-    this.getDataByCategories(1, 'Favorite Product')
+  getDataByCategories = (id, name) => {
+    const { token } = this.props.auth;
+    this.props.getDataByCategories(id, token);
+    this.setState({
+      status: name
+    });
   }
 
   render() {
@@ -61,7 +58,7 @@ class Product extends Component {
               Coupons will be updated every weeks. Check them out!
             </div>
             <Coupon />
-            <button className="focus:outline-none product-card-btn w-60 pt-4 pb-4 text-lg">Apply coupon</button>
+            <button type="button" className="focus:outline-none product-card-btn w-60 pt-4 pb-4 text-lg">Apply coupon</button>
             <div className="flex flex-col pt-24">
               <div className="product-tc text-sm font-bold">
                 Terms and Condition
@@ -80,20 +77,20 @@ class Product extends Component {
               </div>
             </div>
           </div>
-          <div className="flex flex-col h-4/6 md:w-4/6"  style={{borderLeft: '.1rem solid #9F9F9F'}}>
+          <div className="flex flex-col h-4/6 md:w-4/6" style={{ borderLeft: '.1rem solid #9F9F9F' }}>
             <div className="flex flex-row h-1/6 justify-center items-center mx-12 my-6">
               {this.props.category
-                ? this.props.category.data.map((d, i) => (
+                ? this.props.category.data.map((d) => (
                   <Nav key={d.id} func={() => this.getDataByCategories(d.id, d.name_category)} data={d} />
                 ))
-                : "loading"}
+                : 'loading'}
             </div>
             <div className="grid grid-cols-3 md:grid-cols-4 gap-3 h-5/6 p-10 md:px-12 md:mb-20">
               {this.props.product
-                ? this.props.product.data.map((d, i) => (
+                ? this.props.product.data.map((d) => (
                   <Card key={d.id} status={this.state.status} data={d} />
                 ))
-                : "loading"}
+                : 'loading'}
             </div>
           </div>
 
@@ -102,21 +99,21 @@ class Product extends Component {
         <Footer />
 
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
   product: state.product,
   category: state.category,
   user: state.user
-})
+});
 
 const mapDispatchToProps = {
   getDataByCategories,
   getCategory,
   getUserById
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Product)
+export default connect(mapStateToProps, mapDispatchToProps)(Product);

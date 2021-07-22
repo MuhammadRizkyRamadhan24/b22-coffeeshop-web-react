@@ -1,19 +1,18 @@
-/* eslint-disable */
 import { http } from '../../helpers/http';
 
 const { REACT_APP_BASE_URL: URL } = process.env;
 
-export const changeUser = (token, data) => async (dispatch) => {
+export const changeUser = (token, Data) => async (dispatch) => {
   const form = new FormData();
-  if (data.image !== undefined) {
-    form.append('image', data.image[0]);
+  if (Data.image !== undefined) {
+    form.append('image', Data.image[0]);
   }
-  form.append('email', data.email);
-  form.append('phone_number', data.phone_number);
-  form.append('address', data.address);
-  form.append('display_name', data.display_name);
-  form.append('first_name', data.first_name);
-  form.append('last_name', data.last_name);
+  form.append('email', Data.email);
+  form.append('phone_number', Data.phone_number);
+  form.append('address', Data.address);
+  form.append('display_name', Data.display_name);
+  form.append('first_name', Data.first_name);
+  form.append('last_name', Data.last_name);
   // console.log(form.get('image'))
   try {
     const { data } = await http(token).put(`${URL}/private/profile`, form);
