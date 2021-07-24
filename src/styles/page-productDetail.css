@@ -1,55 +1,64 @@
-.productDetail-wrap{
-    height: 60rem;
-    background-color: #d4d4d4;
-    background-size: cover;
-    background-position: center;
+.productDetail-wrap {
+  height: 65rem;
+  background-color: #d4d4d4;
+  background-size: cover;
+  background-position: center;
 }
 
-.productDetail-font-r{
-    font-family: 'Rubik', sans-serif;
+.productDetail-font-r {
+  font-family: 'Rubik', sans-serif;
 }
 
-.productDetail-font-p{
-    font-family: 'Poppins', sans-serif;
+.productDetail-font-p {
+  font-family: 'Poppins', sans-serif;
 }
 
-.brown{
-    color: #6A4029;
+.brown {
+  color: #6A4029;
 }
 
-.yellow{
-    color: #FFBA33;
+.yellow {
+  color: #FFBA33;
 }
 
-.productDetail-bg-brown{
-    background-color: #6A4029;
+.productDetail-bg-brown {
+  background-color: #6A4029;
 }
 
-.productDetail-bg-yellow{
-    background-color: #FFBA33;
+.productDetail-bg-yellow {
+  background-color: #FFBA33;
 }
 
-.productDetail-btn{
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
+.productDetail-btn {
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
 }
 
-.target:target{
-    color: white;
-    background-color: #6A4029;
+.target:target {
+  color: white;
+  background-color: #6A4029;
 }
 
-.productDetail-btn:hover{
-    background-color: #6A4029;
-    color: white;
-    font-weight: 700;
-}
-
-.productDetail-textDel{
-    width: 21rem;
+.productDetail-btn:hover {
+  background-color: #6A4029;
+  color: white;
+  font-weight: 700;
 }
 
 /* .productDetail-detailDel{
     width: 26rem;
 } */
+
+.productDetail-top {
+  top: 65rem
+}
+
+@media (max-width: 767px) {
+  .productDetail-top {
+    top: 73rem
+  }
+  .productDetail-wrap {
+    height: 70rem !important;
+  }
+}

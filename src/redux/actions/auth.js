@@ -17,6 +17,11 @@ export const authLogin = (email, password) => async (dispatch) => {
       type: 'AUTH_LOGIN_FAILED',
       payload: err.response.data.message,
     });
+    setTimeout(() => {
+      dispatch({
+        type: 'AUTH_RESET'
+      });
+    }, 2000);
   }
 };
 
@@ -31,11 +36,21 @@ export const authRegister = (email, phone_number, password) => async (dispatch) 
       type: 'AUTH_REGISTER',
       payload: data.message,
     });
+    setTimeout(() => {
+      dispatch({
+        type: 'AUTH_RESET'
+      });
+    }, 2000);
   } catch (err) {
     dispatch({
       type: 'AUTH_REGISTER_FAILED',
       payload: err.response.data.message,
     });
+    setTimeout(() => {
+      dispatch({
+        type: 'AUTH_RESET'
+      });
+    }, 2000);
   }
 };
 

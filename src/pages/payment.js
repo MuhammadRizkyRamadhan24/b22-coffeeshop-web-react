@@ -115,16 +115,16 @@ class Payment extends Component {
     return (
       <div className="flex flex-col min-h-full">
         <Header history={this.props.history} />
-        <div className="flex flex-row w-full pd-wrap py-12 px-28">
-          <div className="flex flex-col w-3/6 h-full">
-            <div className="text-left text-4xl w-72 text-white pd-title mb-10">Checkout your item now!</div>
-            <div className="flex flex-col bg-white rounded-3xl h-full justify-center items-center px-10">
-              <div className="text-center text-3xl pd-title-detail pb-8">Order summary</div>
+        <div className="flex flex-col h-auto md:flex-row w-full pd-wrap p-4 md:py-12 md:px-28">
+          <div className="flex flex-col w-full md:w-3/6 md:h-full">
+            <div className="text-center md:text-left text-2xl md:text-4xl w-full md:w-72 text-white pd-title my-10 md:mt-0 md:mb-10">Checkout your item now!</div>
+            <div className="flex flex-col bg-white rounded-3xl h-full justify-center items-center py-10 md:px-10">
+              <div className="text-center text-2xl md:text-3xl pd-title-detail pb-8">Order summary</div>
               <div className="flex flex-col">
                 <div className="flex flex-col h-80 w-80 overflow-y-auto">
                   {this.props.carts.items.length > 0
                     ? this.props.carts.items.map((d) => (
-                      <div key={d.id} className="flex  my-4 mx-4 text-xl items-center">
+                      <div key={d.id} className="flex my-4 mx-4 text-xl items-center">
                         <img className="w-20 h-20 rounded-full mr-4" src={`http://localhost:8880/static/images/${d.image}`} alt="" />
                         <div className="flex flex-col w-full pr-4 pd-text-iDetail">
                           <p>{d.name}</p>
@@ -185,9 +185,9 @@ class Payment extends Component {
                 </div>
               </div>
             </div>
-
           </div>
-          <div className="flex flex-col w-3/6 h-full pt-32 pl-5">
+
+          <div className="flex flex-col w-full md:w-3/6 md:h-full pt-8 pb-8 md:pb-0 md:pt-32 md:pl-5">
             <div className="flex flex-row w-full h-10 items-center">
               <div className="text-xl pd-title text-white w-5/6">Address details</div>
               {/* <a href=" " className="text-lg pd-title text-white w-1/6">edit</a> */}

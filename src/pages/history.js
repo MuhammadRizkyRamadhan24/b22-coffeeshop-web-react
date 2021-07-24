@@ -92,6 +92,7 @@ function History(props) {
               icon: 'error',
               title: 'Oops...',
               text: 'Something went wrong',
+              confirmButtonColor: '#6A4029'
             });
           });
       }
@@ -175,7 +176,7 @@ function History(props) {
                                   <p>
                                     IDR
                                     {' '}
-                                    {d.price}
+                                    {v.price}
                                   </p>
                                 </div>
                               </div>

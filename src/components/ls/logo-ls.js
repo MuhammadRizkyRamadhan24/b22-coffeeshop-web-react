@@ -9,7 +9,7 @@ class Logo extends Component {
     return (
       <>
         <img src={logo} alt="" className="ls-logo" />
-        <img src={textLogo} alt="" className="ls-textLogo" />
+        <img src={textLogo} alt="" className="hidden md:flex ls-textLogo" />
       </>
     );
   }

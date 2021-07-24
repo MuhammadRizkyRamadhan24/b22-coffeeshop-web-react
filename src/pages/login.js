@@ -50,7 +50,7 @@ class Login extends Component {
     return (
       <div className="flex flex-col ls-wrap">
         <div className="flex flex-col md:flex-row w-full ls-hw">
-          <div className="w-full md:w-2/4 h-full">
+          <div className="hidden md:flex w-full md:w-2/4 h-full">
             <Background />
           </div>
           <div className="flex flex-col w-full md:w-2/4 h-full">
@@ -81,7 +81,7 @@ class Login extends Component {
           </div>
         </div>
 
-        <div className="absolute w-full h-52 flex px-10 md:px-32 justify-center items-center top-1/4 md:top-full">
+        <div className="absolute w-full h-52 hidden md:flex px-10 md:px-32 justify-center items-center top-1/4 md:top-full">
           <div className="flex flex-col md:flex-row items-center rounded-2xl bg-white shadow-xl w-full h-full">
             <div className="flex flex-col w-full md:w-4/6 h-full px-14 py-11 md:px-14 md:py-12">
               <p className="text-xl md:text-4xl w-48 md:w-80 ls-font-r font-bold py-2">Get your member card now!</p>

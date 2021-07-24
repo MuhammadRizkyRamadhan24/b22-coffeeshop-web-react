@@ -11,7 +11,7 @@ class Footer extends Component {
     return (
       <>
         <div className="flex flex-col md:flex-row w-full f-wrap">
-          <div className="flex flex-col w-full md:w-2/4 h-2/4 md:h-full px-32 pt-10 md:pt-48 pb-10">
+          <div className="flex flex-col w-full md:w-2/4 h-2/4 md:h-full px-32 pt-20 md:pt-48 pb-10">
             <div className="flex flex-row">
               <img src={logo} alt="" className="f-logo" />
               <img src={textLogo} alt="" className="f-textLogo" />

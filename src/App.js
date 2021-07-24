@@ -10,7 +10,7 @@ import Payment from './pages/payment';
 import Profile from './pages/profile';
 import History from './pages/history';
 import PrivateRoute from './components/privateRoute';
-// import Search from './pages/Search';
+import Search from './pages/Search';
 
 function App() {
   return (
@@ -26,6 +26,7 @@ function App() {
           <Route path="/profile" component={Profile} />
           <Route path="/payment" component={Payment} />
           <Route path="/history" component={History} />
+          <Route path="/products" component={Search} />
         </PrivateRoute>
         {/* <Route path='/product' exact component={Product} /> */}
         {/* <Route path='/product/:id' component={ProductDetail} /> */}

@@ -39,6 +39,14 @@ const auth = (state = initialState, action) => {
         errMsg: '',
       };
     }
+    case 'AUTH_RESET': {
+      return {
+        ...state,
+        token: null,
+        msg: '',
+        errMsg: '',
+      };
+    }
     default: {
       return {
         ...state,

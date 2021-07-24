@@ -5,7 +5,7 @@ class Img extends Component {
   render() {
     return (
       <>
-        <img src={`http://localhost:8880/static/images/${this.props.image}`} alt="" className="rounded-full w-24 h-24" />
+        <img src={`http://localhost:8880/static/images/${this.props.image}`} alt="" className="rounded-full w-10 h-10 md:w-24 md:h-24" />
       </>
     );
   }
