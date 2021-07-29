@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import { FaGoogle } from 'react-icons/fa';
 import { connect } from 'react-redux';
 import { authLogin } from '../redux/actions/auth';
-import Background from '../components/ls/background-ls';
-import Logo from '../components/ls/logo-ls';
-import ButtonMini from '../components/ls/button-mini-ls';
-import Form from '../components/ls/form-ls';
-import ButtonForm from '../components/ls/button-form-ls';
-import Footer from '../components/footer';
+import Background from '../components/ls/BackgroundLs';
+import Logo from '../components/ls/LogoLs';
+import ButtonMini from '../components/ls/ButtonMiniLs';
+import Form from '../components/ls/FormLs';
+import ButtonForm from '../components/ls/ButtonFormLs';
+import Footer from '../components/Footer';
 import '../styles/page-ls.css';
 
 class Login extends Component {

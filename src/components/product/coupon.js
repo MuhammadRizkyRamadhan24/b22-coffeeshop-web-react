@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import imgCoupon from '../../assets/images/spageti.png';
 import '../../styles/page-product.css';
-// eslint-disable-next-line react/prefer-stateless-function
+
 class Coupon extends Component {
   render() {
     return (

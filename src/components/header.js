@@ -1,20 +1,20 @@
-/* eslint-disable react/no-unused-state */
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { FaSearch, FaEnvelope } from 'react-icons/fa';
 import { connect } from 'react-redux';
 import { getUserById } from '../redux/actions/user';
 import logo from '../assets/images/logo.png';
 import textLogo from '../assets/images/textLogo.png';
-import ButtonMini from './ls/button-mini-ls';
+import ButtonMini from './ls/ButtonMiniLs';
 import img from '../assets/images/profile.jpg';
 import '../styles/header.css';
-// eslint-disable-next-line react/prefer-stateless-function
+
 class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
       search: '',
-      page: ''
+      showMenu: false,
     };
   }
 
@@ -47,10 +47,18 @@ class Header extends Component {
     this.props.getUserById(token);
   }
 
-  redirect=(event) => {
+  redirect = (event) => {
+    const { search } = this.state;
     if (event.keyCode === 13) {
-      this.props.history.push(`/products?search=${this.state.search}`);
+      this.props.history.push(`/products?search=${search}&order=name&sort=ASC`);
     }
+  }
+
+  menu = () => {
+    const { showMenu } = this.state;
+    this.setState({
+      showMenu: !showMenu
+    });
   }
 
   render() {
@@ -59,10 +67,28 @@ class Header extends Component {
     return (
       <>
         <div className="flex flex-row w-full h-wrap">
-          <button type="button" onClick={this.goToHome} className="focus:outline-none flex flex-row w-1/6 md:w-2/6 justify-center items-center">
-            <img src={logo} alt="" className="h-logo" />
+          <button type="button" onClick={this.goToHome} className="focus:outline-none hidden md:flex flex-row w-1/6 md:w-2/6 justify-center items-center">
+            <img src={logo} alt="" className="h-logo hidden md:block" />
             <img src={textLogo} alt="" className="h-textLogo hidden md:block" />
           </button>
+          <button type="button" onClick={this.menu} className="focus:outline-none md:hidden flex flex-row w-1/6 md:w-2/6 justify-center items-center">
+            <img src={logo} alt="" className="h-logo md:hidden block" />
+          </button>
+          {this.state.showMenu === true ? (
+            <div className="flex md:hidden justify-end">
+              <div className="flex flex-col w-full left-0 top-8 bg-white p-3 mt-10 fixed">
+                <Link to="/" className="text-gray-600 hover:underline text-sm md:text-base p-2 md:p-4">Home</Link>
+                <Link to="/product" className=" text-gray-600 hover:underline text-sm md:text-base p-2 md:p-4">Product</Link>
+                <Link to="/payment" className=" text-gray-600 hover:underline text-sm md:text-base p-2 md:p-4">Your Cart</Link>
+                <Link to="/profile" className=" text-gray-600 hover:underline text-sm md:text-base p-2 md:p-4">Profile</Link>
+                <Link to="/history" className=" text-gray-600 hover:underline text-sm md:text-base p-2 md:p-4">History</Link>
+              </div>
+
+            </div>
+
+          ) : (
+            <div />
+          )}
           <div className="md:flex flex-row w-2/6 justify-center items-center hidden">
             <button type="button" onClick={this.goToHome} className="focus:outline-none h-sh text-sm">Home</button>
             <button type="button" onClick={this.goToProduct} className="focus:outline-none h-sh text-sm">Product</button>
@@ -97,7 +123,7 @@ class Header extends Component {
 
               : (
                 <>
-                  <button type="button" onClick={() => this.props.history.push('/signup')} className="focus:outline-none history-font text-xs">Sign Up</button>
+                  <button type="button" onClick={() => this.props.history.push('/signup')} className="focus:outline-none history-font text-sm">Sign Up</button>
                   <ButtonMini page="Login" definition="login" history={this.props.history} />
                 </>
               )}

@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable react/no-access-state-in-setstate */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FaTruck, FaUniversity, FaCreditCard } from 'react-icons/fa';
@@ -8,8 +6,8 @@ import Loader from 'react-loader-spinner';
 import { deleteAllItems } from '../redux/actions/carts';
 import { getUserById } from '../redux/actions/user';
 import { createTransaction } from '../redux/actions/transaction';
-import Header from '../components/header';
-import Footer from '../components/footer';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 import '../styles/page-payDel.css';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
@@ -56,16 +54,19 @@ class Payment extends Component {
     this.props.carts.items.map((element) => item_amount.push(element.amount));
     this.props.carts.items.map((element) => item_variant.push(element.variant));
     this.props.carts.items.map((element) => item_additional_price.push(element.additional_price));
+    const {
+      item_id: itemId, item_amount: itemAmount, item_variant: itemVariant, item_additional_price: itemAdditionalPrice, shipping
+    } = this.state;
     this.setState({
-      item_id: this.state.item_id.concat(item_id),
-      item_amount: this.state.item_amount.concat(item_amount),
-      item_variant: this.state.item_variant.concat(item_variant),
-      item_additional_price: this.state.item_additional_price.concat(item_additional_price)
+      item_id: itemId.concat(item_id),
+      item_amount: itemAmount.concat(item_amount),
+      item_variant: itemVariant.concat(item_variant),
+      item_additional_price: itemAdditionalPrice.concat(item_additional_price)
     }, () => {
       const subTotal = this.props.carts.items.map((element, idx) => element.end_price * this.state.item_amount[idx]).reduce((acc, curr) => acc + curr);
       this.setState({
         subTotal,
-        total: subTotal + this.state.shipping + (subTotal * (10 / 100))
+        total: subTotal + shipping + (subTotal * (10 / 100))
       });
     });
   }
@@ -115,7 +116,7 @@ class Payment extends Component {
     return (
       <div className="flex flex-col min-h-full">
         <Header history={this.props.history} />
-        <div className="flex flex-col h-auto md:flex-row w-full pd-wrap p-4 md:py-12 md:px-28">
+        <div className="flex flex-col h-auto md:flex-row w-full pd-wrap p-12 md:py-12 md:px-28">
           <div className="flex flex-col w-full md:w-3/6 md:h-full">
             <div className="text-center md:text-left text-2xl md:text-4xl w-full md:w-72 text-white pd-title my-10 md:mt-0 md:mb-10">Checkout your item now!</div>
             <div className="flex flex-col bg-white rounded-3xl h-full justify-center items-center py-10 md:px-10">
@@ -125,7 +126,7 @@ class Payment extends Component {
                   {this.props.carts.items.length > 0
                     ? this.props.carts.items.map((d) => (
                       <div key={d.id} className="flex my-4 mx-4 text-xl items-center">
-                        <img className="w-20 h-20 rounded-full mr-4" src={`http://localhost:8880/static/images/${d.image}`} alt="" />
+                        <img className="w-20 h-20 rounded-full mr-4 object-cover" src={`http://localhost:8880/static/images/${d.image}`} alt="" />
                         <div className="flex flex-col w-full pr-4 pd-text-iDetail">
                           <p>{d.name}</p>
                           <p>
@@ -151,7 +152,7 @@ class Payment extends Component {
                     )}
 
                 </div>
-                <div className="flex flex-row py-10">
+                <div className="flex flex-row px-4 md:px-0 py-10">
                   <div className="flex flex-col w-3/6">
                     <p className="text-xl pd-text-iDetail">SUBTOTAL</p>
                     <p className="text-xl pd-text-iDetail">TAX & FEES</p>
@@ -171,7 +172,7 @@ class Payment extends Component {
                     </p>
                   </div>
                 </div>
-                <div className="flex flex-row">
+                <div className="flex px-4 md:px-0 flex-row">
                   <div className="flex flex-col w-3/6">
                     <p className="text-2xl font-medium pd-text-iDetail">TOTAL</p>
                   </div>

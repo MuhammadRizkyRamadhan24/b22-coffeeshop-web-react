@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../../styles/page-productDetail.css';
-// eslint-disable-next-line react/prefer-stateless-function
-class Button extends Component {
+
+class ButtonVariant extends Component {
   render() {
     return (
       <>
@@ -11,4 +11,4 @@ class Button extends Component {
   }
 }
 
-export default Button;
+export default ButtonVariant;

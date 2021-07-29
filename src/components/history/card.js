@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import '../../styles/page-history.css';
 
-// eslint-disable-next-line react/prefer-stateless-function
 class Card extends Component {
   render() {
     const {
@@ -32,10 +31,10 @@ class Card extends Component {
                 </p>
               </div>
               <div className="flex justify-end items-end w-1/5">
-                <input
+                {/* <input
                   name="isGoing"
                   type="checkbox"
-                />
+                /> */}
               </div>
             </div>
           </div>

@@ -13,9 +13,10 @@ export const changeUser = (token, Data) => async (dispatch) => {
   form.append('display_name', Data.display_name);
   form.append('first_name', Data.first_name);
   form.append('last_name', Data.last_name);
-  // console.log(form.get('image'))
+  form.append('date_birth', Data.date_birth);
+  form.append('gender', Data.gender);
   try {
-    const { data } = await http(token).put(`${URL}/private/profile`, form);
+    const { data } = await http(token).patch(`${URL}/private/profile`, form);
     dispatch({
       type: 'CHANGE_USER',
       payload: data.message,

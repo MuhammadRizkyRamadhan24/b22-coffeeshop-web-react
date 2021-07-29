@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import '../../styles/page-ls.css';
 
-// eslint-disable-next-line react/prefer-stateless-function
-class Form extends Component {
+class ButtonFormLs extends Component {
   render() {
     const { page } = this.props;
     return (
@@ -13,4 +12,4 @@ class Form extends Component {
   }
 }
 
-export default Form;
+export default ButtonFormLs;

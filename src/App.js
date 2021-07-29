@@ -1,15 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Home from './pages/home';
-import Login from './pages/login';
-import Signup from './pages/signup';
-import Product from './pages/product';
-import ProductDetail from './pages/productDetail';
-import ForgotPass from './pages/forgotpass';
-import Payment from './pages/payment';
-import Profile from './pages/profile';
-import History from './pages/history';
-import PrivateRoute from './components/privateRoute';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import Product from './pages/Product';
+import ProductDetail from './pages/ProductDetail';
+import ForgotPass from './pages/ForgotPass';
+import Payment from './pages/Payment';
+import Profile from './pages/Profile';
+import History from './pages/History';
+import PrivateRoute from './components/PrivateRoute';
 import Search from './pages/Search';
 
 function App() {

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import '../../styles/page-ls.css';
 
-// eslint-disable-next-line react/prefer-stateless-function
-class Form extends Component {
+class ButtonMiniLs extends Component {
   goToDefinition = () => {
     const { history, definition } = this.props;
     history.push(`/${definition}`);
@@ -12,10 +11,10 @@ class Form extends Component {
     const { page } = this.props;
     return (
       <>
-        <button type="button" className="focus:outline-none rounded-full ls-buttonTop" onClick={this.goToDefinition}>{page}</button>
+        <button type="button" className="focus:outline-none rounded-full ls-buttonTop text-xs md:text-base" onClick={this.goToDefinition}>{page}</button>
       </>
     );
   }
 }
 
-export default Form;
+export default ButtonMiniLs;

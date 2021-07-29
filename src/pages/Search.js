@@ -1,15 +1,11 @@
-/* eslint-disable radix */
-/* eslint-disable no-plusplus */
-/* eslint-disable react/no-unused-state */
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import QueryString from 'query-string';
 import Swal from 'sweetalert2';
-import Header from '../components/header';
-import Footer from '../components/footer';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 import { getDataSearch } from '../redux/actions/product';
-import Card from '../components/product/card';
+import Card from '../components/product/Card';
 
 class Search extends Component {
   constructor(props) {
@@ -18,7 +14,8 @@ class Search extends Component {
       search: '',
       page: '',
       sort: '',
-      order: ''
+      order: '',
+      sortOrder: ''
     };
   }
 
@@ -30,11 +27,15 @@ class Search extends Component {
     if (prevProps.location.search !== this.props.location.search) {
       this.getSearch();
     }
-    if (prevState.sort !== this.state.sort) {
-      this.sort();
-    }
-    if (prevState.order !== this.state.order) {
-      this.sortOrder();
+    // if (prevState.sort !== this.state.sort) {
+    //   this.sort();
+    //   this.sortCoba();
+    // }
+    // if (prevState.order !== this.state.order) {
+    //   this.sortOrder();
+    // }
+    if (prevState.sortOrder !== this.state.sortOrder) {
+      this.sortCoba();
     }
   }
 
@@ -63,23 +64,35 @@ class Search extends Component {
     });
   }
 
-  sortOrder = () => {
-    const qs = QueryString.parse(this.props.location.search);
-    if (qs.order) {
-      const url = this.props.location.search.replace(`order=${qs.order}`, `order=${this.state.order}`);
-      this.props.history.push(url);
-    } else {
-      this.props.history.push(`${this.props.location.search}&order=${this.state.order}`);
-    }
-  }
+  // sortOrder = () => {
+  //   const qs = QueryString.parse(this.props.location.search);
+  //   if (qs.order) {
+  //     const url = this.props.location.search.replace(`order=${qs.order}`, `order=${this.state.order}`);
+  //     this.props.history.push(url);
+  //   } else {
+  //     this.props.history.push(`${this.props.location.search}&order=${this.state.order}`);
+  //   }
+  // }
 
-  sort = () => {
+  // sort = () => {
+  //   const qs = QueryString.parse(this.props.location.search);
+  //   if (qs.sort) {
+  //     const url = this.props.location.search.replace(`sort=${qs.sort}`, `sort=${this.state.sort}`);
+  //     this.props.history.push(url);
+  //   } else {
+  //     this.props.history.push(`${this.props.location.search}&sort=${this.state.sort}`);
+  //   }
+  // }
+
+  sortCoba = () => {
+    const str = this.state.sortOrder.split(' ');
     const qs = QueryString.parse(this.props.location.search);
-    if (qs.sort) {
-      const url = this.props.location.search.replace(`sort=${qs.sort}`, `sort=${this.state.sort}`);
-      this.props.history.push(url);
+    if (qs.order && qs.sort) {
+      const url = this.props.location.search.replace(`order=${qs.order}`, `order=${str[0]}`);
+      const finalUrl = url.replace(`sort=${qs.sort}`, `sort=${str[1]}`);
+      this.props.history.push(finalUrl);
     } else {
-      this.props.history.push(`${this.props.location.search}&sort=${this.state.sort}`);
+      this.props.history.push(`${this.props.location.search}&order=${str[0]}&sort=${str[1]}`);
     }
   }
 
@@ -104,7 +117,7 @@ class Search extends Component {
     }
     const prev = '<';
     const next = '>';
-    const page = parseInt(this.state.page);
+    const page = parseInt(this.state.page, 10);
     return (
       <div className="flex flex-col min-h-full">
         <Header history={this.props.history} />
@@ -118,7 +131,7 @@ class Search extends Component {
               onChange={(e) => this.setState({ search: e.target.value })}
               className="focus:outline-none h-full text-xl w-3/6 md:w-2/3 history-font mx-4"
             />
-            <select className="history-font mx-2 focus:outline-none" onChange={(e) => this.setState({ sort: e.target.value })} value={this.state.sort}>
+            {/* <select className="history-font mx-2 focus:outline-none" onChange={(e) => this.setState({ sort: e.target.value })} value={this.state.sort}>
               <option disabled>Sort</option>
               <option value="ASC">A - Z</option>
               <option value="DESC">Z - A</option>
@@ -127,6 +140,13 @@ class Search extends Component {
               <option disabled>Order</option>
               <option value="name">Name</option>
               <option value="price">Price</option>
+            </select> */}
+            <select className="history-font mx-2 focus:outline-none" onChange={(e) => this.setState({ sortOrder: e.target.value })} value={this.state.sortOrder}>
+              <option disabled>Order</option>
+              <option value="name ASC">Name A-Z</option>
+              <option value="name DESC">Name Z-A</option>
+              <option value="price DESC">Highest Price</option>
+              <option value="price ASC">Lowest Price</option>
             </select>
           </div>
           <div className="grid grid-cols-3 md:grid-cols-4 gap-3 h-5/6 p-10 md:px-12 md:mb-20">

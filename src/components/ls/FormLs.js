@@ -2,8 +2,7 @@
 import React, { Component } from 'react';
 import '../../styles/page-ls.css';
 
-// eslint-disable-next-line react/prefer-stateless-function
-class Form extends Component {
+class FormLs extends Component {
   render() {
     const {
       label, type, id, name, placeholder, value, func
@@ -19,4 +18,4 @@ class Form extends Component {
   }
 }
 
-export default Form;
+export default FormLs;

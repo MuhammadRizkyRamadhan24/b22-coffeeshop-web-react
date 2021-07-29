@@ -56,9 +56,9 @@
 
 @media (max-width: 767px) {
   .productDetail-top {
-    top: 73rem
+    top: 78.5rem
   }
   .productDetail-wrap {
-    height: 70rem !important;
+    height: 76rem !important;
   }
 }

@@ -1,15 +1,14 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
-const privateRoute = ({ children, auth, ...rest }) => {
+const PrivateRoute = ({ children, auth, ...rest }) => {
   const { token } = auth;
   return (
     <Route
       {...rest}
-      render={(props) => {
+      render={() => {
         if (token !== null) {
           return (children);
         }
@@ -23,4 +22,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps)(privateRoute);
+export default connect(mapStateToProps)(PrivateRoute);

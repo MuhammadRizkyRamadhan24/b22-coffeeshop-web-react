@@ -27,7 +27,6 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 2vh;
     font-weight: 500;
     font-family: 'Rubik', sans-serif;
     margin: 3rem;
@@ -67,7 +66,7 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 1.2vmax;
+    font-size: 1rem;
     font-weight: 700;
     font-family: 'Rubik', sans-serif;
     cursor: pointer;
@@ -81,7 +80,7 @@
     padding: 1rem 3rem;
     text-align: center;
     text-decoration: none;
-    font-size: 1.2vmax;
+    font-size: 1rem;
     font-weight: 700;
     font-family: 'Rubik', sans-serif;
     cursor: pointer;

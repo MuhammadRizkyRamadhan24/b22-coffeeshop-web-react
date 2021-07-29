@@ -3,8 +3,7 @@ import background from '../../assets/images/login-signup.png';
 
 import '../../styles/page-ls.css';
 
-// eslint-disable-next-line react/prefer-stateless-function
-class Background extends Component {
+class BackgroundLs extends Component {
   render() {
     return (
       <>
@@ -14,4 +13,4 @@ class Background extends Component {
   }
 }
 
-export default Background;
+export default BackgroundLs;

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Footer from '../components/footer';
+import Footer from '../components/Footer';
 
 import '../styles/page-fp.css';
 
-class Forgot extends Component {
+class ForgotPass extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,4 +44,4 @@ class Forgot extends Component {
   }
 }
 
-export default Forgot;
+export default ForgotPass;

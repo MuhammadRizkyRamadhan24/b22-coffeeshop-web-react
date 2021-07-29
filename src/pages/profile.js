@@ -1,13 +1,11 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable react/no-access-state-in-setstate */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Modal from 'react-modal';
 import { FaPencilAlt } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import img from '../assets/images/profile.jpg';
-import Header from '../components/header';
-import Footer from '../components/footer';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 import '../styles/page-profile.css';
 import {
   changePassword, getUserById, userLogout, changeUser
@@ -26,6 +24,8 @@ class Profile extends Component {
       display_name: '',
       first_name: '',
       last_name: '',
+      date_birth: '',
+      gender: '',
       oldPassword: '',
       newPassword: '',
       modalIsOpen: false,
@@ -65,21 +65,39 @@ class Profile extends Component {
             display_name: this.state.display_name,
             first_name: this.state.first_name,
             last_name: this.state.last_name,
+            date_birth: this.state.date_birth,
+            gender: this.state.gender
           };
           const { token } = this.props.auth;
+          const { forUpdate } = this.state;
           this.props.changeUser(token, data)
             .then(async () => {
-              await Swal.fire({
-                position: 'center',
-                icon: 'info',
-                title: 'Data User Updated!',
-                showConfirmButton: false,
-                timer: 1500
-              }).then(() => {
-                this.setState({
-                  forUpdate: !this.state.forUpdate
+              if (this.props.user.msg === 'User updated successfully!') {
+                await Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'Data User Updated!',
+                  showConfirmButton: false,
+                  timer: 1500
+                }).then(() => {
+                  this.setState({
+                    forUpdate: !forUpdate
+                  });
                 });
-              });
+              } else {
+                await Swal.fire({
+                  position: 'center',
+                  icon: 'error',
+                  title: `${this.props.user.msg}`,
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+                  .then(() => {
+                    this.setState({
+                      forUpdate: !forUpdate
+                    });
+                  });
+              }
             }).catch((err) => {
               console.log(err);
               Swal.fire({
@@ -97,22 +115,39 @@ class Profile extends Component {
             display_name: this.state.display_name,
             first_name: this.state.first_name,
             last_name: this.state.last_name,
+            date_birth: this.state.date_birth,
+            gender: this.state.gender
           };
           const { token } = this.props.auth;
+          const { forUpdate } = this.state;
           this.props.changeUser(token, data)
             .then(async () => {
-              await Swal.fire({
-                position: 'center',
-                icon: 'info',
-                title: 'Data User Updated!',
-                showConfirmButton: false,
-                timer: 1500
-              })
-                .then(() => {
+              if (this.props.user.msg === 'User updated successfully!') {
+                await Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'Data User Updated!',
+                  showConfirmButton: false,
+                  timer: 1500
+                }).then(() => {
                   this.setState({
-                    forUpdate: !this.state.forUpdate
+                    forUpdate: !forUpdate
                   });
                 });
+              } else {
+                await Swal.fire({
+                  position: 'center',
+                  icon: 'error',
+                  title: `${this.props.user.msg}`,
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+                  .then(() => {
+                    this.setState({
+                      forUpdate: !forUpdate
+                    });
+                  });
+              }
             }).catch((err) => {
               console.log(err);
               Swal.fire({
@@ -139,8 +174,9 @@ class Profile extends Component {
   }
 
   openCloseButton = () => {
+    const { buttonIsOpen } = this.state;
     this.setState({
-      buttonIsOpen: !this.state.buttonIsOpen
+      buttonIsOpen: !buttonIsOpen
     });
   }
 
@@ -148,6 +184,12 @@ class Profile extends Component {
     const { token } = this.props.auth;
     this.props.getUserById(token)
       .then(() => {
+        const parse = Date.parse(this.props.user.data[0].date_birth);
+        const newDate = new Date(parse);
+        const date = newDate.getDate();
+        const month = newDate.getMonth();
+        const year = newDate.getFullYear();
+        const final = `${year}-${month + 1}-${date}`;
         this.setState({
           email: this.props.user.data[0].email,
           showImage: this.props.user.data[0].image,
@@ -156,6 +198,8 @@ class Profile extends Component {
           display_name: this.props.user.data[0].display_name,
           first_name: this.props.user.data[0].first_name,
           last_name: this.props.user.data[0].last_name,
+          date_birth: final,
+          gender: this.props.user.data[0].gender,
           loading: false
         });
       });
@@ -214,10 +258,10 @@ class Profile extends Component {
       <div className="flex flex-col min-h-full">
         <Header history={this.props.history} />
 
-        <div className="flex flex-col w-full profile-wrap p-28 h-auto">
-          <div className="profile-title py-4 h-1/6">User Profile</div>
-          <div className="flex flex-row w-full h-2/6 mb-16">
-            <div className="flex flex-col w-4/12 bg-white py-4 mr-8 rounded-md profile-border justify-center items-center">
+        <div className="flex flex-col w-full profile-wrap p-12 md:p-28 h-auto">
+          <div className="profile-title text-3xl py-4 h-1/6">User Profile</div>
+          <div className="flex flex-col md:flex-row w-full h-2/6 mb-16">
+            <div className="flex flex-col mb-8 md:mb-0 w-full md:w-4/12 bg-white py-4 mr-8 rounded-md profile-border justify-center items-center">
               <img className="rounded-full w-36 h-36 object-cover object-center" src={this.state.showImage === null ? img : `http://localhost:8880/static/images/${this.state.showImage}`} alt=" " />
               <button type="button" onClick={this.openCloseButton} className="focus:outline-none flex justify-center items-center rounded-full h-8 w-8 mr-3 profile-bi profile-bi-p">
                 <FaPencilAlt className="text-white" />
@@ -225,12 +269,12 @@ class Profile extends Component {
               {this.state.buttonIsOpen === true ? <input className="w-48 mb-2" name="image" onChange={(e) => this.setState({ image: e.target.files })} type="file" accept="image/x-png,image/gif,image/jpeg" /> : <></>}
               {this.state.loading ? <></> : (
                 <>
-                  <div className="text-xl profile-name">{this.props.user.data[0].display_name}</div>
+                  <div className="text-xl text-center profile-name">{this.props.user.data[0].display_name}</div>
                   <div className="text-xs profile-email">{this.props.user.data[0].email}</div>
                 </>
               )}
             </div>
-            <div className="flex flex-col w-8/12 bg-white py-4 px-8 rounded-md profile-border">
+            <div className="flex flex-col w-full md:w-8/12 bg-white py-4 px-8 rounded-md profile-border">
               <div className="flex flex-row w-full h-1/6">
                 <div className="flex w-2/4 items-center justify-start profile-textContact text-2xl">Contacts</div>
                 <div className="flex w-2/4 items-center justify-end">
@@ -251,8 +295,8 @@ class Profile extends Component {
               </div>
             </div>
           </div>
-          <div className="flex flex-row w-full h-3/6 mb-16">
-            <div className="flex flex-col w-4/6 bg-white py-4 px-8 rounded-md profile-border">
+          <div className="flex flex-col md:flex-row w-full h-3/6 mb-16">
+            <div className="flex flex-col w-full mb-4 md:mb-0 md:w-4/6 bg-white py-4 px-8 rounded-md profile-border">
               <div className="flex flex-row w-full h-1/6">
                 <div className="flex w-2/4 items-center justify-start profile-textContact text-2xl">Details</div>
                 <div className="flex w-2/4 items-center justify-end">
@@ -272,27 +316,27 @@ class Profile extends Component {
                 <input className="focus:outline-none profile-input" value={this.state.last_name} onChange={(e) => { this.setState({ last_name: e.target.value }); }} type="text" id="l-name" name="l-name" placeholder="Enter your value" />
 
                 <label className="profile-label text-lg pr-2 py-4">DD/MM/YY:</label>
-                <input className="focus:outline-none profile-input" defaultValue="1990-04-03" type="date" id="l-name" name="l-name" placeholder="Enter your value" />
+                <input className="focus:outline-none profile-input" onChange={(e) => this.setState({ date_birth: e.target.value })} value={this.state.date_birth} type="date" id="l-name" name="l-name" placeholder="Enter your value" />
 
                 <label className="profile-rb text-lg pl-8 mb-4 mt-8">
                   Male
-                  <input type="radio" id="male" name="gender" />
+                  <input onChange={(e) => this.setState({ gender: e.target.value })} value="male" type="radio" id="male" name="gender" />
                   <span className="checkmark" />
                 </label>
 
                 <label className="profile-rb text-lg pl-8 my-4">
                   Female
-                  <input type="radio" id="female" name="gender" />
+                  <input onChange={(e) => this.setState({ gender: e.target.value })} value="female" type="radio" id="female" name="gender" />
                   <span className="checkmark" />
                 </label>
               </div>
             </div>
-            <div className="flex flex-col w-2/6 px-4">
-              <div className="flex justify-center items-center profile-title-2">Do you want to save the change?</div>
-              <button onClick={this.changeUser} className="focus:outline-none my-4 shadow-md profile-button-b" type="submit">Save change</button>
-              <button type="button" className="focus:outline-none mt-1 mb-8 shadow-md profile-button-y">Cancel</button>
-              <button type="button" onClick={this.openModal} className="focus:outline-none my-4 shadow-md profile-button-w">Change Password</button>
-              <button type="button" onClick={this.logout} className="focus:outline-none mt-1 mb-4 shadow-md profile-button-w">Log out</button>
+            <div className="flex flex-col w-full md:w-2/6 px-4">
+              <div className="flex justify-center text-lg items-center profile-title-2">Do you want to save the change?</div>
+              <button onClick={this.changeUser} className="focus:outline-none my-4 shadow-md text-lg profile-button-b" type="submit">Save change</button>
+              <button type="button" className="focus:outline-none mt-1 mb-8 shadow-md text-lg profile-button-y">Cancel</button>
+              <button type="button" onClick={this.openModal} className="focus:outline-none my-4 shadow-md text-lg profile-button-w">Change Password</button>
+              <button type="button" onClick={this.logout} className="focus:outline-none mt-1 mb-4 shadow-md text-lg profile-button-w">Log out</button>
               <Modal
                 isOpen={this.state.modalIsOpen}
                 onRequestClose={this.closeModal}

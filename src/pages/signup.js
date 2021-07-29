@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import Swal from 'sweetalert2';
 import { FaGoogle } from 'react-icons/fa';
 import { connect } from 'react-redux';
-import Background from '../components/ls/background-ls';
-import Logo from '../components/ls/logo-ls';
-import ButtonMini from '../components/ls/button-mini-ls';
-import Form from '../components/ls/form-ls';
-import ButtonForm from '../components/ls/button-form-ls';
-import Footer from '../components/footer';
+import Background from '../components/ls/BackgroundLs';
+import Logo from '../components/ls/LogoLs';
+import ButtonMini from '../components/ls/ButtonMiniLs';
+import Form from '../components/ls/FormLs';
+import ButtonForm from '../components/ls/ButtonFormLs';
+import Footer from '../components/Footer';
 import '../styles/page-ls.css';
 import { authRegister } from '../redux/actions/auth';
 
@@ -114,7 +114,7 @@ class Signup extends Component {
 
                 <ButtonForm page="Sign Up" />
               </form>
-              <a className="flex justify-center items-center shadow-md ls-button-g" href="http://google.com">
+              <a className="flex justify-center items-center my-4 shadow-md ls-button-g" href="http://google.com">
                 <FaGoogle className="pr-1" />
                 Sign Up with Google
               </a>

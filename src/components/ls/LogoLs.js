@@ -3,8 +3,7 @@ import logo from '../../assets/images/logo.png';
 import textLogo from '../../assets/images/textLogo.png';
 import '../../styles/page-ls.css';
 
-// eslint-disable-next-line react/prefer-stateless-function
-class Logo extends Component {
+class LogoLs extends Component {
   render() {
     return (
       <>
@@ -15,4 +14,4 @@ class Logo extends Component {
   }
 }
 
-export default Logo;
+export default LogoLs;

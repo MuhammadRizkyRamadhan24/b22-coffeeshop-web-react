@@ -5,7 +5,6 @@ import textLogo from '../assets/images/textLogo.png';
 
 import '../styles/footer.css';
 
-// eslint-disable-next-line react/prefer-stateless-function
 class Footer extends Component {
   render() {
     return (
