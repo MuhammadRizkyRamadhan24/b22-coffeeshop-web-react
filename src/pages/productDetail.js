@@ -126,9 +126,10 @@ class ProductDetail extends Component {
   getDetailData = () => {
     const { token } = this.props.auth;
     const { id } = this.props.match.params;
-    this.props.getDataById(id, token);
-    this.setState({
-      loading: false
+    this.props.getDataById(id, token).then(() => {
+      this.setState({
+        loading: false
+      });
     });
   }
 

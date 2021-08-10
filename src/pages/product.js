@@ -33,10 +33,11 @@ class Product extends Component {
 
   getDataByCategories = (id, name) => {
     const { token } = this.props.auth;
-    this.props.getDataByCategories(id, token);
-    this.setState({
-      status: name,
-      loading: false
+    this.props.getDataByCategories(id, token).then(() => {
+      this.setState({
+        status: name,
+        loading: false
+      });
     });
   }
 
