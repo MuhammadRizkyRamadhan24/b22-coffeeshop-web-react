@@ -126,7 +126,7 @@ class Payment extends Component {
                   {this.props.carts.items.length > 0
                     ? this.props.carts.items.map((d) => (
                       <div key={d.id} className="flex my-4 mx-4 text-xl items-center">
-                        <img className="w-20 h-20 rounded-full mr-4 object-cover" src={`http://localhost:8880/static/images/${d.image}`} alt="" />
+                        <img className="w-20 h-20 rounded-full mr-4 object-cover" src={`https://coffee-shopapp.herokuapp.com/static/images/${d.image}`} alt="" />
                         <div className="flex flex-col w-full pr-4 pd-text-iDetail">
                           <p>{d.name}</p>
                           <p>

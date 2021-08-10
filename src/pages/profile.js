@@ -262,7 +262,7 @@ class Profile extends Component {
           <div className="profile-title text-3xl py-4 h-1/6">User Profile</div>
           <div className="flex flex-col md:flex-row w-full h-2/6 mb-16">
             <div className="flex flex-col mb-8 md:mb-0 w-full md:w-4/12 bg-white py-4 mr-8 rounded-md profile-border justify-center items-center">
-              <img className="rounded-full w-36 h-36 object-cover object-center" src={this.state.showImage === null ? img : `http://localhost:8880/static/images/${this.state.showImage}`} alt=" " />
+              <img className="rounded-full w-36 h-36 object-cover object-center" src={this.state.showImage === null ? img : `https://coffee-shopapp.herokuapp.com/static/images/${this.state.showImage}`} alt=" " />
               <button type="button" onClick={this.openCloseButton} className="focus:outline-none flex justify-center items-center rounded-full h-8 w-8 mr-3 profile-bi profile-bi-p">
                 <FaPencilAlt className="text-white" />
               </button>

@@ -166,7 +166,7 @@ function History(props) {
                                 {typeof props.transaction.detailData === 'object'
                                   ? props.transaction.detailData.items.map((v) => (
                                     <div key={v.id} className="flex flex-row my-4 mx-4 text-lg items-center">
-                                      <img className="w-20 h-20 rounded-full mr-4" src={`http://localhost:8880/static/images/${v.image}`} alt="" />
+                                      <img className="w-20 h-20 rounded-full mr-4" src={`https://coffee-shopapp.herokuapp.com/static/images/${v.image}`} alt="" />
                                       <div className="flex flex-col w-full pr-4 history-font">
                                         <p>{v.item_name}</p>
                                         <p>
