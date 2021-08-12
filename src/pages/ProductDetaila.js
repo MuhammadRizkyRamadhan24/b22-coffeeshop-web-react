@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import Swal from 'sweetalert2';
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import ImageXL from '../components/productDetail/ImageXl';
-import ImageSM from '../components/productDetail/ImageSm';
-import ButtonVariant from '../components/productDetail/ButtonVariant';
+import Header from '../components/Headera';
+import Footer from '../components/Footera';
+import ImageXL from '../components/productDetail/ImageXla';
+import ImageSM from '../components/productDetail/ImageSma';
+import ButtonVariant from '../components/productDetail/ButtonVarianta';
 
 import { getDataById } from '../redux/actions/product';
 import { addItems } from '../redux/actions/carts';

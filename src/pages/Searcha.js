@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import QueryString from 'query-string';
 import Swal from 'sweetalert2';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import Header from '../components/Headera';
+import Footer from '../components/Footera';
 import { getDataSearch } from '../redux/actions/product';
-import Card from '../components/product/Card';
+import Card from '../components/product/Carda';
 
 class Search extends Component {
   constructor(props) {

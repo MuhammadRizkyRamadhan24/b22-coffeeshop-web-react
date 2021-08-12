@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import Swal from 'sweetalert2';
 import { FaGoogle } from 'react-icons/fa';
 import { connect } from 'react-redux';
-import Background from '../components/ls/BackgroundLs';
-import Logo from '../components/ls/LogoLs';
-import ButtonMini from '../components/ls/ButtonMiniLs';
-import Form from '../components/ls/FormLs';
-import ButtonForm from '../components/ls/ButtonFormLs';
-import Footer from '../components/Footer';
+import Background from '../components/ls/BackgroundLsa';
+import Logo from '../components/ls/LogoLsa';
+import ButtonMini from '../components/ls/ButtonMiniLsa';
+import Form from '../components/ls/FormLsa';
+import ButtonForm from '../components/ls/ButtonFormLsa';
+import Footer from '../components/Footera';
 import '../styles/page-ls.css';
 import { authRegister } from '../redux/actions/auth';
 

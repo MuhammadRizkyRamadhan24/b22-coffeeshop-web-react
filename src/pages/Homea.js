@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { FaCheckCircle, FaStar } from 'react-icons/fa';
 import { FcCheckmark } from 'react-icons/fc';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import Header from '../components/Headera';
+import Footer from '../components/Footera';
 import image1 from '../assets/images/image1.png';
 import image2 from '../assets/images/1.png';
 import image3 from '../assets/images/2.png';

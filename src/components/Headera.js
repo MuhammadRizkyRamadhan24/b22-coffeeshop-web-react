@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { getUserById } from '../redux/actions/user';
 import logo from '../assets/images/logo.png';
 import textLogo from '../assets/images/textLogo.png';
-import ButtonMini from './ls/ButtonMiniLs';
+import ButtonMini from './ls/ButtonMiniLsa';
 import img from '../assets/images/profile.jpg';
 import '../styles/header.css';
 

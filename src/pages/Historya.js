@@ -4,9 +4,9 @@ import Swal from 'sweetalert2';
 import Loader from 'react-loader-spinner';
 // import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Footer from '../components/Footer';
-import Header from '../components/Header';
-import Card from '../components/history/Card';
+import Footer from '../components/Footera';
+import Header from '../components/Headera';
+import Card from '../components/history/Carda';
 import { getHistory, getDetailHistory, deleteTransaction } from '../redux/actions/transaction';
 
 import '../styles/page-ls.css';

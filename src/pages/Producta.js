@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import Coupon from '../components/product/Coupon';
-import Card from '../components/product/Card';
-import Nav from '../components/product/Nav';
+import Header from '../components/Headera';
+import Footer from '../components/Footera';
+import Coupon from '../components/product/Coupona';
+import Card from '../components/product/Carda';
+import Nav from '../components/product/Nava';
 import '../styles/page-ls.css';
 
 import { getDataByCategories } from '../redux/actions/product';

@@ -4,8 +4,8 @@ import Modal from 'react-modal';
 import { FaPencilAlt } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import img from '../assets/images/profile.jpg';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import Header from '../components/Headera';
+import Footer from '../components/Footera';
 import '../styles/page-profile.css';
 import {
   changePassword, getUserById, userLogout, changeUser

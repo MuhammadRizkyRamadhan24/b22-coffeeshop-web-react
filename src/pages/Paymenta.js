@@ -6,8 +6,8 @@ import Loader from 'react-loader-spinner';
 import { deleteAllItems } from '../redux/actions/carts';
 import { getUserById } from '../redux/actions/user';
 import { createTransaction } from '../redux/actions/transaction';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import Header from '../components/Headera';
+import Footer from '../components/Footera';
 import '../styles/page-payDel.css';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
